@@ -1,13 +1,8 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
-import java.util.Arrays;
-
 public class Application {
 
 	public static void main(String[] args) {
-		System.out.println("Hello Application");
-		System.out.println(Arrays.asList(args));
-
 		
 		if(args.length < 1) {
 			System.out.println("No variables: source file path and output file path.");
@@ -20,20 +15,19 @@ public class Application {
 		}
 		
 		Application application = new Application(args);
-		application.printProps();
+		
+		System.out.println("App END.");
 	}
 
 	private final AppProperties appProperties;
 
 	Application(String[] args) {
-		System.out.println("Application constructor");
 		
 		// Loading properties and checking props rules. ---
 		this.appProperties = new AppProperties(args);
 		
 		if(! appProperties.isSuccessfullyInitialized()) {
 			System.out.println("Application EXIT.");
-			System.out.println("props:" + appProperties);
 			System.exit(1);
 		}
 		// ------------------------------------------------
@@ -50,10 +44,18 @@ public class Application {
 			System.exit(1);
 		}
 		// -------------------------------------------------
-	}
-	
-	void printProps() {
-		System.out.println("PrintProps:");
-		System.out.println(appProperties);
+		
+		// Checking shorterBigTextFile rules. --------------
+		try {
+			if(! ShorterBigTextFileRules.areSatisfied(appProperties)) {
+				System.out.println("Application EXIT.");
+				System.exit(0);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Application EXIT.");
+			System.exit(1);
+		}
+		// --------------------------------------------------
 	}
 }
