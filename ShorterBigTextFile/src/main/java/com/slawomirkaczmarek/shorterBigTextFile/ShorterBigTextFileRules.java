@@ -12,23 +12,24 @@ class ShorterBigTextFileRules {
 	// Prevents instantiation.
 	private ShorterBigTextFileRules() {}
 
-	static boolean areSatisfied(AppProperties appProperties) throws Exception {
+//	static boolean areSatisfied(AppProperties appProperties) throws Exception {
+	static boolean areSatisfied(AppProperties appProperties){
 		
 		Path path = appProperties.newShorterTextFilePath;
-		try {
+//		try {
 			if(Files.exists(path)) {
 				try {
 					Files.delete(path);
 					System.out.println("Deleted ShorterTextFile: " + path);
 				}catch (Exception e) {
 					System.out.println("EXCEPTION from Files.deleteIfExists(): " + e.getMessage());
-					throw e;
+//					throw e;
 				}
 			}
-		}catch (Exception e) {
-			System.out.println("EXCEPTION from Files.exists(): " + e.getMessage());
-			throw e;
-		}
+//		}catch (Exception e) {
+//			System.out.println("EXCEPTION from Files.exists(): " + e.getMessage());
+//			throw e;
+//		}
 		
 		double size = appProperties.newShorterTextFileSize.megaBytes();
 		if(Double.compare(size, FileSize.MAX_MEGA_BYTES) > 0) {
