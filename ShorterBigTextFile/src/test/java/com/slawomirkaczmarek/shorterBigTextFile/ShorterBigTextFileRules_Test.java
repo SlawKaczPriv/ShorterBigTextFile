@@ -24,7 +24,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MAX_MEGA_BYTES)};
 		AppProperties appProps = new AppProperties(args);
-		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
 	
 	@Test
@@ -32,7 +32,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MIN_MEGA_BYTES - 1)};
 		AppProperties appProps = new AppProperties(args);
-		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
 	
 	@Test
