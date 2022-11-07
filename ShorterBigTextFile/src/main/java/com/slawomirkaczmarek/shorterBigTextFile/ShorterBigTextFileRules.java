@@ -16,20 +16,17 @@ class ShorterBigTextFileRules {
 	static boolean areSatisfied(AppProperties appProperties){
 		
 		Path path = appProperties.newShorterTextFilePath;
-//		try {
-			if(Files.exists(path)) {
-				try {
-					Files.delete(path);
-					System.out.println("Deleted ShorterTextFile: " + path);
-				}catch (Exception e) {
-					System.out.println("EXCEPTION from Files.deleteIfExists(): " + e.getMessage());
-//					throw e;
-				}
+		
+		// Delete destination file if exists.
+		if(Files.exists(path)) {
+			try {
+				Files.delete(path);
+				System.out.println("Deleted ShorterTextFile: " + path);
+			}catch (Exception e) {
+				System.out.println("EXCEPTION from Files.delete(): " + e.getMessage());
+				return false;
 			}
-//		}catch (Exception e) {
-//			System.out.println("EXCEPTION from Files.exists(): " + e.getMessage());
-//			throw e;
-//		}
+		}
 		
 		double size = appProperties.newShorterTextFileSize.megaBytes();
 		if(Double.compare(size, FileSize.MAX_MEGA_BYTES) > 0) {
@@ -38,7 +35,7 @@ class ShorterBigTextFileRules {
 			return false;
 		}else if(Double.compare(size, FileSize.MIN_MEGA_BYTES) < 0) {
 			System.out.println("To small NewShorterTextFile size. Min value: "
-					+ FileSize.MIN_MEGA_BYTES + " MB.");
+					+ FileSize.MIN_MEGA_BYTES + " MB. Requested size: " + size);
 			return false;
 		}
 	

@@ -11,6 +11,7 @@ class ShorterBigTextFileRules_Test {
 	static void setUpBeforeClass() throws Exception {
 	}
 
+	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeToBig() throws Exception {
 		
@@ -19,6 +20,7 @@ class ShorterBigTextFileRules_Test {
 		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
 
+	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeMaxSize() throws Exception {
 		
@@ -27,6 +29,7 @@ class ShorterBigTextFileRules_Test {
 		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
 	
+	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeToSmall() throws Exception {
 		
@@ -35,6 +38,7 @@ class ShorterBigTextFileRules_Test {
 		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
 	
+	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeMinSize() throws Exception {
 		
@@ -42,4 +46,18 @@ class ShorterBigTextFileRules_Test {
 		AppProperties appProps = new AppProperties(args);
 		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
 	}
+	
+//	@Test
+//	void parsToInt_test() throws Exception {
+//		
+//		System.out.println("MAX MEGA BYTES=" + FileSize.MAX_MEGA_BYTES);
+//		
+//		String number = String.valueOf(Integer.MAX_VALUE);
+//		System.out.println(number);
+//		System.out.println(Integer.parseInt(number));
+//		
+//		number = String.valueOf((long) Integer.MAX_VALUE + 1);
+//		System.out.println(number);
+//		System.out.println(Integer.parseInt(number));
+//	}
 }

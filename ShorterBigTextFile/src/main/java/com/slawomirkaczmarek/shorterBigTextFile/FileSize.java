@@ -19,14 +19,14 @@ class FileSize {
 	/** 1 [MB] Mega Bytes */
 	public static final int MIN_MEGA_BYTES = 1;
 	
-	private final int bytes;
+	private final long bytes;
 	private final double megaBytes;
 
 	/**
 	 * 
 	 * @param bytes
 	 */
-	FileSize(int bytes) {
+	FileSize(long bytes) {
 		
 		this.bytes = bytes;
 		this.megaBytes = bytes / ONE_MEGA_BYTES;
@@ -44,7 +44,7 @@ class FileSize {
 	 * 
 	 * @return
 	 */
-	int bytes() {
+	long bytes() {
 		return bytes;
 	}
 
