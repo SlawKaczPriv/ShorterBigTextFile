@@ -67,6 +67,19 @@ public class Application {
 		}
 		// --------------------------------------------------
 		
+		// Checking application rules.
+		try {
+			if(! ApplicationRules.areSatisfied(appProperties)) {
+				System.out.println("Application EXIT.");
+				System.exit(0);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Application EXIT.");
+			System.exit(1);
+		}
+		// --------------------------------------------------
+		
 		int newShorterTextFileSize = (int) appProperties.newShorterTextFileSize.bytes();
 		
 		try(FileChannel fChan = (FileChannel) Files.newByteChannel(appProperties.bigTextFilePath);
