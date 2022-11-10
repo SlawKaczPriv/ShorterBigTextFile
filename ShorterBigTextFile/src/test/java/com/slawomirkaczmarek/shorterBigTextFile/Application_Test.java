@@ -48,16 +48,7 @@ class Application_Test {
 	@Test
 	public void applicatin_Test_bigTextFileNotExists() throws Exception {
 		
-//		Properties props = new Properties();
-//		props.put("key1", "value1");
-//		props.put("key2", "value2");
-//		Application application = new Application(props);
-//		application.printProps();
-//		fail("Not yet implemented");
-		
-		
 		Path shortTextFilePath = Paths.get("src/test/resources/shortTextFile.txt");
-//		Files.deleteIfExists(shortTextFilePath);
 		Commons.deleteIfExists(shortTextFilePath, "Application_Test");
 		
 		String[] args = new String[] {"blabla",
@@ -66,22 +57,12 @@ class Application_Test {
 		Application.main(args);
 		
 		assertFalse(Files.exists(shortTextFilePath));
-//		assertEquals(2, Files.size(shortTextFilePath) / FileSize.ONE_MEGA_BYTES);
 	}
 
 	@Test
 	public void applicatin_Test_defaultSize() throws Exception {
 		
-//		Properties props = new Properties();
-//		props.put("key1", "value1");
-//		props.put("key2", "value2");
-//		Application application = new Application(props);
-//		application.printProps();
-//		fail("Not yet implemented");
-		
-		
 		Path shortTextFilePath = Paths.get("src/test/resources/shortTextFile.txt");
-//		Files.deleteIfExists(shortTextFilePath);
 		Commons.deleteIfExists(shortTextFilePath, "Application_Test");
 		
 		String[] args = new String[] {Commons.BIG_TEXT_FILE_PATH.toString(),

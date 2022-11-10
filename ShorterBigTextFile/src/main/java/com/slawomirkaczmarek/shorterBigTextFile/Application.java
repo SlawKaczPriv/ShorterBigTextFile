@@ -2,12 +2,9 @@ package com.slawomirkaczmarek.shorterBigTextFile;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
-
-import javax.sql.CommonDataSource;
 
 public class Application {
 
@@ -80,19 +77,22 @@ public class Application {
 		}
 		// --------------------------------------------------
 		
-		int newShorterTextFileSize = (int) appProperties.newShorterTextFileSize.bytes();
+		SourceFile bigTextFile = new SourceFile(appProperties.bigTextFilePath);
+		bigTextFile.shortenTo(appProperties.newShorterTextFilePath, appProperties.newShorterTextFileSize);
 		
-		try(FileChannel fChan = (FileChannel) Files.newByteChannel(appProperties.bigTextFilePath);
-				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(appProperties.newShorterTextFilePath.toString()))){
-			MappedByteBuffer mBuf = fChan.map(FileChannel.MapMode.READ_ONLY, 0, fChan.size());
-			byte character;
-			for(int i = mBuf.limit() - newShorterTextFileSize; i < mBuf.limit(); i++) {
-				character = mBuf.get(i);
-				bufferdWriter.write(character);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+//		int newShorterTextFileSize = (int) appProperties.newShorterTextFileSize.bytes();
+//		
+//		try(FileChannel fChan = (FileChannel) Files.newByteChannel(appProperties.bigTextFilePath);
+//				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(appProperties.newShorterTextFilePath.toString()))){
+//			MappedByteBuffer mBuf = fChan.map(FileChannel.MapMode.READ_ONLY, 0, fChan.size());
+//			byte character;
+//			for(int i = mBuf.limit() - newShorterTextFileSize; i < mBuf.limit(); i++) {
+//				character = mBuf.get(i);
+//				bufferdWriter.write(character);
+//			}
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 //		try {
 //			Files.deleteIfExists(appProperties.newShorterTextFilePath);

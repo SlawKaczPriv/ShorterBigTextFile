@@ -24,12 +24,12 @@ class ApplicationRules {
 		try {
 			bigTextFileSize = Files.size(appProperties.bigTextFilePath);
 		} catch (IOException e) {
-			System.out.println("EXCEPTION from Files.size(): " + e.getMessage());
+			System.out.println("EXCEPTION from Files.size() for bigTextFile: " + e.getMessage());
 			return false;
 		}
 		
 		if(appProperties.newShorterTextFileSize.bytes() >= bigTextFileSize) {
-			System.out.println("Size of new file is bigger than size of bigTextFile.");
+			System.out.println("Size of new short file is bigger than size of bigTextFile.");
 			return false;
 		}
 		
