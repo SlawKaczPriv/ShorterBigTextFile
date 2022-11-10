@@ -11,8 +11,7 @@ class ShorterBigTextFileRules {
 	// Public or default constructor is not needed.
 	// Prevents instantiation.
 	private ShorterBigTextFileRules() {}
-
-//	static boolean areSatisfied(AppProperties appProperties) throws Exception {
+	
 	static boolean areSatisfied(AppProperties appProperties){
 		
 		Path path = appProperties.newShorterTextFilePath;

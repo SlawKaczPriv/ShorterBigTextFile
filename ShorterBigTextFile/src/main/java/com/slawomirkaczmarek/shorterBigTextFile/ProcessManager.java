@@ -10,49 +10,29 @@ class ProcessManager {
 
 	void start() {
 		
+		SourceFile bigTextFile;
+		
 		if(! appProperties.isSuccessfullyInitialized()) {
-			System.out.println("Application EXIT.");
-			System.exit(1);
-		}
-		// ------------------------------------------------
-		
-		SourceFile bigTextFile = new SourceFile(appProperties.bigTextFilePath);
-		
-		// Checking bigTextFile rules. --------------------
-		if(! BigTextFileRules.areSatisfied(bigTextFile)) {
-			System.out.println("Application EXIT.");
-//			System.exit(0);
 			return;
 		}
-		// -------------------------------------------------
 		
-		// Checking shorterBigTextFile rules. --------------
-		try {
-			if(! ShorterBigTextFileRules.areSatisfied(appProperties)) {
-				System.out.println("Application EXIT.");
-				System.exit(0);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Application EXIT.");
-			System.exit(1);
+		bigTextFile = new SourceFile(appProperties.bigTextFilePath);
+		
+		if(! BigTextFileRules.areSatisfied(bigTextFile)) {
+			return;
 		}
-		// --------------------------------------------------
 		
-		// Checking application rules.
-		try {
-			if(! ApplicationRules.areSatisfied(appProperties)) {
-				System.out.println("Application EXIT.");
-				System.exit(0);
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Application EXIT.");
-			System.exit(1);
+		if(! ShorterBigTextFileRules.areSatisfied(appProperties)) {
+			return;
 		}
-		// --------------------------------------------------
 		
-		bigTextFile.shortenTo(appProperties.newShorterTextFilePath, appProperties.newShorterTextFileSize);
+		if(! ApplicationRules.areSatisfied(appProperties)) {
+			return;
+		}
+		
+		// All checking rules passed.
+		// Run Main Functionality of application.
+		bigTextFile.shortenTo(appProperties.newShorterTextFilePath, appProperties.newShorterTextFileSize.bytes());
 	}
 
 }

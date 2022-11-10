@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * 
+ * The Class with MAIN FUNCTIONALITY of application.
  */
 class SourceFile {
 
@@ -71,15 +71,16 @@ class SourceFile {
 	}
 
 	/**
+	 * MAIN FUNCTIONALITY of application.
 	 * 
 	 * @param destinationFilePath
 	 * @param destinationFileSize
 	 * 
 	 * @return true if success otherwise false.
 	 */
-	boolean shortenTo(Path destinationFilePath, FileSize destinationFileSize) {
+	boolean shortenTo(Path destinationFilePath, long destinationFileSize) {
 		
-		int newShorterTextFileSize = (int) destinationFileSize.bytes();
+		int newShorterTextFileSize = (int) destinationFileSize;
 		
 		try(FileChannel fChan = (FileChannel) Files.newByteChannel(this.path);
 				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(destinationFilePath.toString()))){
