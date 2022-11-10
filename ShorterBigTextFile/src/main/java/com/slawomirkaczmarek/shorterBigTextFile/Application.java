@@ -79,27 +79,5 @@ public class Application {
 		
 		SourceFile bigTextFile = new SourceFile(appProperties.bigTextFilePath);
 		bigTextFile.shortenTo(appProperties.newShorterTextFilePath, appProperties.newShorterTextFileSize);
-		
-//		int newShorterTextFileSize = (int) appProperties.newShorterTextFileSize.bytes();
-//		
-//		try(FileChannel fChan = (FileChannel) Files.newByteChannel(appProperties.bigTextFilePath);
-//				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(appProperties.newShorterTextFilePath.toString()))){
-//			MappedByteBuffer mBuf = fChan.map(FileChannel.MapMode.READ_ONLY, 0, fChan.size());
-//			byte character;
-//			for(int i = mBuf.limit() - newShorterTextFileSize; i < mBuf.limit(); i++) {
-//				character = mBuf.get(i);
-//				bufferdWriter.write(character);
-//			}
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-//		try {
-//			Files.deleteIfExists(appProperties.newShorterTextFilePath);
-//			System.out.println("Application. Deleted file: " + appProperties.newShorterTextFilePath);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 }
