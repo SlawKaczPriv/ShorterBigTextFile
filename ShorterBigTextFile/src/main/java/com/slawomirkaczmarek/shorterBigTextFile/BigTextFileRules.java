@@ -1,8 +1,5 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 /**
  * 
  */
@@ -14,34 +11,22 @@ class BigTextFileRules {
 
 	/**
 	 * 
-	 * @param bigTextFilePath
+	 * @param bigTextFile
 	 * @return
 	 */
-	static boolean areSatisfied(Path bigTextFilePath) throws Exception{
+	static boolean areSatisfied(SourceFile bigTextFile) {
 		
-		try {
-			if(! Files.exists(bigTextFilePath)) {
-				System.out.println("NOT exists BigTextFile: " + bigTextFilePath);
-				return false;
-			}
-		}catch (Exception e) {
-			System.out.println("EXCEPTION from Files.exists(): " + e.getMessage());
-			throw e;
+		if(! bigTextFile.exists()) {
+			System.out.println("NOT exists BigTextFile: " + bigTextFile);
+			return false;
 		}
 		
-		try {
-			long bigTextFileSize = Files.size(bigTextFilePath);
-			System.out.println("BigTextFile Size = " + bigTextFileSize);
-			if(bigTextFileSize > Integer.MAX_VALUE) {
-				System.out.println("BigTextFile size is to big. Max size = " + Integer.MAX_VALUE + " Bytes.");
-				return false;
-			}else if(bigTextFileSize < FileSize.ONE_MEGA_BYTES) {
-				System.out.println("BigTextFile size is to small. Min size = " + FileSize.ONE_MEGA_BYTES + " Bytes.");
-				return false;
-			}
-		}catch (Exception e) {
-			System.out.println("EXCEPTION from File.size(): " + e.getMessage());
-			throw e;
+		if(bigTextFile.getSize() > Integer.MAX_VALUE) {
+			System.out.println("BigTextFile size is to big. Max size = " + Integer.MAX_VALUE + " Bytes.");
+			return false;
+		}else if(bigTextFile.getSize() < FileSize.ONE_MEGA_BYTES) {
+			System.out.println("BigTextFile size is to small. Min size = " + FileSize.ONE_MEGA_BYTES + " Bytes.");
+			return false;
 		}
 		
 		return true;

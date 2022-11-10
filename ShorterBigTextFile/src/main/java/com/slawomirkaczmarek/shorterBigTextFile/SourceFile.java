@@ -50,6 +50,10 @@ class SourceFile {
 	
 	private long size(Path path) {
 		
+		if(! this.exists) {
+			return -1;
+		}
+		
 		try {
 			return Files.size(path);
 		}catch (Exception e) {
@@ -91,5 +95,10 @@ class SourceFile {
 			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());
 			return false;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + size + " bytes]";
 	}
 }

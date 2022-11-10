@@ -17,13 +17,18 @@ class BigTextFileRules_Test {
 
 	@Test
 	void areSatisfied_test_bigTextFileExists() throws Exception {
-		assertTrue(BigTextFileRules.areSatisfied(Commons.BIG_TEXT_FILE_PATH));
+		
+		SourceFile bigTextFile = new SourceFile(Commons.BIG_TEXT_FILE_PATH);
+		
+		assertTrue(BigTextFileRules.areSatisfied(bigTextFile));
 	}
 
 	@Test
 	void areSatisfied_test_bigTextFileNotExists() throws Exception {
 		
 		Path fileNotExistsPath = Paths.get("blabla");
-		assertFalse(BigTextFileRules.areSatisfied(fileNotExistsPath));
+		SourceFile fileNotExists = new SourceFile(fileNotExistsPath);
+				
+		assertFalse(BigTextFileRules.areSatisfied(fileNotExists));
 	}
 }
