@@ -6,15 +6,15 @@ import java.nio.file.Path;
 /**
  * 
  */
-class ShorterBigTextFileRules {
+class ShorterTextFileRules {
 	
 	// Public or default constructor is not needed.
 	// Prevents instantiation.
-	private ShorterBigTextFileRules() {}
+	private ShorterTextFileRules() {}
 	
 	static boolean areSatisfied(AppProperties appProperties){
 		
-		Path path = appProperties.newShorterTextFilePath;
+		Path path = appProperties.shorterTextFilePath;
 		
 		// Delete destination file if exists.
 		if(Files.exists(path)) {
@@ -27,7 +27,7 @@ class ShorterBigTextFileRules {
 			}
 		}
 		
-		double size = appProperties.newShorterTextFileSize.megaBytes();
+		double size = appProperties.shorterTextFileSize.megaBytes();
 		if(Double.compare(size, FileSize.MAX_MEGA_BYTES) > 0) {
 			System.out.println("To big NewShorterTextFile size. Max value:"
 					+ FileSize.MAX_MEGA_BYTES + " MB.");

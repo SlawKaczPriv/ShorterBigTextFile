@@ -25,8 +25,8 @@ class AppProperties_Test {
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
-		assertEquals(dest, appProp.newShorterTextFilePath);
-		assertEquals(fileSize, appProp.newShorterTextFileSize);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
 		
 		args = new String[] {};
 		appProp = new AppProperties(args);
@@ -36,8 +36,8 @@ class AppProperties_Test {
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
-		assertEquals(dest, appProp.newShorterTextFilePath);
-		assertEquals(fileSize, appProp.newShorterTextFileSize);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
 		
 		args = new String[] {"source", "dest"};
 		appProp = new AppProperties(args);
@@ -47,8 +47,8 @@ class AppProperties_Test {
 
 		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
-		assertEquals(dest, appProp.newShorterTextFilePath);
-		assertEquals(fileSize, appProp.newShorterTextFileSize);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
 		
 		
 		args = new String[] {"source", "dest", "2"};
@@ -59,8 +59,8 @@ class AppProperties_Test {
 		
 		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
-		assertEquals(dest, appProp.newShorterTextFilePath);
-		assertEquals(fileSize, appProp.newShorterTextFileSize);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
 		
 		args = new String[] {"source", "dest", "2.9"};
 		appProp = new AppProperties(args);
@@ -70,7 +70,7 @@ class AppProperties_Test {
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
-		assertEquals(dest, appProp.newShorterTextFilePath);
-		assertEquals(fileSize, appProp.newShorterTextFileSize);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
 	}
 }

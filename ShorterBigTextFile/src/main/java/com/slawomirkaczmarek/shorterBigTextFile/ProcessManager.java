@@ -22,7 +22,7 @@ class ProcessManager {
 			return;
 		}
 		
-		if(! ShorterBigTextFileRules.areSatisfied(appProperties)) {
+		if(! ShorterTextFileRules.areSatisfied(appProperties)) {
 			return;
 		}
 		
@@ -32,7 +32,6 @@ class ProcessManager {
 		
 		// All checking rules passed.
 		// Run Main Functionality of application.
-		bigTextFile.shortenTo(appProperties.newShorterTextFilePath, appProperties.newShorterTextFileSize.bytes());
+		bigTextFile.shortenTo(appProperties.shorterTextFilePath, appProperties.shorterTextFileSize.bytes());
 	}
-
 }

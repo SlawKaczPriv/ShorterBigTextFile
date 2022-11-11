@@ -17,7 +17,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MAX_MEGA_BYTES + 1)};
 		AppProperties appProps = new AppProperties(args);
-		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertFalse(ShorterTextFileRules.areSatisfied(appProps));
 	}
 
 	// Edge case
@@ -26,7 +26,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MAX_MEGA_BYTES)};
 		AppProperties appProps = new AppProperties(args);
-		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertTrue(ShorterTextFileRules.areSatisfied(appProps));
 	}
 	
 	// Edge case
@@ -35,7 +35,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MIN_MEGA_BYTES - 1)};
 		AppProperties appProps = new AppProperties(args);
-		assertFalse(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertFalse(ShorterTextFileRules.areSatisfied(appProps));
 	}
 	
 	// Edge case
@@ -44,7 +44,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(FileSize.MIN_MEGA_BYTES)};
 		AppProperties appProps = new AppProperties(args);
-		assertTrue(ShorterBigTextFileRules.areSatisfied(appProps));
+		assertTrue(ShorterTextFileRules.areSatisfied(appProps));
 	}
 	
 //	@Test

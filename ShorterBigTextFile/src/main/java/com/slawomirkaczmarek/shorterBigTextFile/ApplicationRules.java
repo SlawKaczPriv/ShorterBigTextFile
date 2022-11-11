@@ -28,7 +28,7 @@ class ApplicationRules {
 			return false;
 		}
 		
-		if(appProperties.newShorterTextFileSize.bytes() >= bigTextFileSize) {
+		if(appProperties.shorterTextFileSize.bytes() >= bigTextFileSize) {
 			System.out.println("Size of new short file is bigger than size of bigTextFile.");
 			return false;
 		}
