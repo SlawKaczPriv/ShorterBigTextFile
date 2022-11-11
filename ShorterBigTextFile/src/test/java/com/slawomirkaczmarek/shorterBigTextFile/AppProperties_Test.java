@@ -15,58 +15,78 @@ class AppProperties_Test {
 	}
 
 	@Test
-	final void isSuccessfullyInitialized_test() {
+	final void test1_test() {
 
 		String[] args = new String[] {"source"};
+		
 		AppProperties appProp = new AppProperties(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("");
-		FileSize fileSize = new FileSize(-1 * FileSize.ONE_MEGA_BYTES);
+		FileSize fileSize = new FileSize(FileSize.DEFAULT_SIZE);
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
 		assertEquals(dest, appProp.shorterTextFilePath);
 		assertEquals(fileSize, appProp.shorterTextFileSize);
+	}
+
+	@Test
+	final void test2_test() {
 		
-		args = new String[] {};
-		appProp = new AppProperties(args);
-		source = Paths.get("");
-		dest = Paths.get("");
-		fileSize = new FileSize(-1 * FileSize.ONE_MEGA_BYTES);
+		String[] args = new String[] {};
+		
+		AppProperties appProp = new AppProperties(args);
+		Path source = Paths.get("");
+		Path dest = Paths.get("");
+		FileSize fileSize = new FileSize(FileSize.DEFAULT_SIZE);
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
 		assertEquals(dest, appProp.shorterTextFilePath);
 		assertEquals(fileSize, appProp.shorterTextFileSize);
+	}
+
+	@Test
+	final void test3_test() {
 		
-		args = new String[] {"source", "dest"};
-		appProp = new AppProperties(args);
-		source = Paths.get("source");
-		dest = Paths.get("dest");
-		fileSize = new FileSize(FileSize.DEFAULT_SIZE);
+		String[] args = new String[] {"source", "dest"};
+		
+		AppProperties appProp = new AppProperties(args);
+		Path source = Paths.get("source");
+		Path dest = Paths.get("dest");
+		FileSize fileSize = new FileSize(FileSize.DEFAULT_SIZE);
 
 		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
 		assertEquals(dest, appProp.shorterTextFilePath);
 		assertEquals(fileSize, appProp.shorterTextFileSize);
+	}
+
+	@Test
+	final void test4_test() {
 		
+		String[] args = new String[] {"source", "dest", "2"};
 		
-		args = new String[] {"source", "dest", "2"};
-		appProp = new AppProperties(args);
-		source = Paths.get("source");
-		dest = Paths.get("dest");
-		fileSize = new FileSize(2 * FileSize.ONE_MEGA_BYTES);
+		AppProperties appProp = new AppProperties(args);
+		Path source = Paths.get("source");
+		Path dest = Paths.get("dest");
+		FileSize fileSize = new FileSize(2 * FileSize.ONE_MEGA_BYTES);
 		
 		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
 		assertEquals(dest, appProp.shorterTextFilePath);
 		assertEquals(fileSize, appProp.shorterTextFileSize);
+	}
+
+	@Test
+	final void test5_test() {
 		
-		args = new String[] {"source", "dest", "2.9"};
-		appProp = new AppProperties(args);
-		source = Paths.get("source");
-		dest = Paths.get("dest");
-		fileSize = new FileSize(-1 * FileSize.ONE_MEGA_BYTES);
+		String[] args = new String[] {"source", "dest", "2.9"};
+		
+		AppProperties appProp = new AppProperties(args);
+		Path source = Paths.get("source");
+		Path dest = Paths.get("dest");
+		FileSize fileSize = new FileSize(-1);
 		
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);

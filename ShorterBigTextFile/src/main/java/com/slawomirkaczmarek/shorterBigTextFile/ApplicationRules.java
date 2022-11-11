@@ -19,7 +19,7 @@ class ApplicationRules {
 	 */
 	static boolean areSatisfied(AppProperties appProperties) {
 		
-		long bigTextFileSize = 0;
+		long bigTextFileSize;// = -1;
 		
 		try {
 			bigTextFileSize = Files.size(appProperties.bigTextFilePath);
@@ -28,7 +28,7 @@ class ApplicationRules {
 			return false;
 		}
 		
-		if(appProperties.shorterTextFileSize.bytes() >= bigTextFileSize) {
+		if(appProperties.shorterTextFileSize.bytes() < bigTextFileSize) {
 			System.out.println("Size of new short file is bigger than size of bigTextFile.");
 			return false;
 		}

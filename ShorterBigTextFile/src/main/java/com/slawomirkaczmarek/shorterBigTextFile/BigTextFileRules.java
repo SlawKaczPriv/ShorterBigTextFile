@@ -21,11 +21,11 @@ class BigTextFileRules {
 			return false;
 		}
 		
-		if(bigTextFile.getSize() > Integer.MAX_VALUE) {
-			System.out.println("BigTextFile size is to big. Max size = " + Integer.MAX_VALUE + " Bytes.");
+		if(bigTextFile.getSize() > Long.MAX_VALUE) {
+			System.out.println("BigTextFile size is to big. Max size = " + Long.MAX_VALUE + " Bytes.");
 			return false;
 		}else if(bigTextFile.getSize() < FileSize.ONE_MEGA_BYTES) {
-			System.out.println("BigTextFile size is to small. Min size = " + FileSize.ONE_MEGA_BYTES + " Bytes.");
+			System.out.println("BigTextFile size is to small. Min size = 1 MB (bytes: " + FileSize.ONE_MEGA_BYTES);
 			return false;
 		}
 		

@@ -23,7 +23,7 @@ public class Application {
 			System.exit(1);
 		}
 		
-		new ProcessManager(args).start();
+		new ProcessManager(args).run();
 		
 		System.out.println("App END.");
 //		System.exit(0);

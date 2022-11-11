@@ -1,5 +1,6 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -55,25 +56,44 @@ class AppProperties {
 		
 		if(args.length == 3) {
 			try {
-				int size = Integer.parseInt(args[2]);
-				this.successfullyInitialized = true;
-				return new FileSize(size * FileSize.ONE_MEGA_BYTES);
-			}catch (Exception e) {
+				BigInteger size = new BigInteger(args[2]);
+				return validateSize(size);
+			}catch (NumberFormatException e) {
 				System.out.println("ERROR Property size of NewShorterTextFile is not valid. Message: "
 						+ e.getMessage());
 				this.successfullyInitialized = false;
-				return new FileSize(-1 * FileSize.ONE_MEGA_BYTES);
+				return new FileSize(-1);
 			}
 		}else {
-			if(this.successfullyInitialized) {
-				FileSize result = new FileSize(FileSize.DEFAULT_SIZE);
-				System.out.println("Property NewShorterTextFileSize is set as default: "
-						+ result.megaBytes() + " MB.");
-				return result;
-			}else {
-				return new FileSize(-1 * FileSize.ONE_MEGA_BYTES);
-			}
+			return defaultSize();
 		}
+	}
+
+	private FileSize validateSize(BigInteger size) {
+		
+		BigInteger oneMegaBytes = new BigInteger(String.valueOf(FileSize.ONE_MEGA_BYTES));
+		size = size.multiply(oneMegaBytes);
+		BigInteger maxSize = new BigInteger(String.valueOf(Long.MAX_VALUE));
+		
+		if(size.compareTo(new BigInteger("0")) > 0 && size.compareTo(maxSize) <= 0) {
+			return new FileSize(size.longValue());
+		}else {
+			System.out.println("ERROR Property size of NewShorterTextFile is not valid.");
+			this.successfullyInitialized = false;
+			return new FileSize(-1);
+		}
+	}
+
+	private FileSize defaultSize() {
+		
+		FileSize result = new FileSize(FileSize.DEFAULT_SIZE);
+		StringBuilder message = new StringBuilder()
+				.append("Property NewShorterTextFileSize is set as default: ")
+				.append(result.megaBytes())
+				.append(" MB.");
+		System.out.println(message);
+		
+		return result;
 	}
 
 	@Override

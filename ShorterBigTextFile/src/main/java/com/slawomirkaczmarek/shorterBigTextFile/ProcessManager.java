@@ -8,7 +8,7 @@ class ProcessManager {
 		this.appProperties = new AppProperties(args);
 	}
 
-	void start() {
+	void run() {
 		
 		SourceFile bigTextFile;
 		

@@ -10,7 +10,7 @@ class FileSize {
 	/** 1_048_476 Bytes */
 	public static final int ONE_MEGA_BYTES = (int) Math.pow(2, 20);
 	
-	/** 1 [MB] Mega Bytes */
+	/** 1_048_476 Bytes */
 	public static final int DEFAULT_SIZE = ONE_MEGA_BYTES;
 	
 	/** 2047 [MB] Mega Bytes */
