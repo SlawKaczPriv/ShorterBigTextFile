@@ -30,15 +30,7 @@ public class Application {
 
 	private static void printHelp() {
 		
-		Package mainPackage = Application.class.getPackage();
-		String version = mainPackage.getImplementationVersion();
-//		String groupId = mainPackage.getName();
-//		String artifactId = mainPackage.getImplementationTitle();
-//		
-//		System.out.println(version);
-//		System.out.println(groupId);
-//		System.out.println(artifactId);
-//		
-		System.out.println("shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] (optional)[destinationFileSize] in MegaBytes");
+		String version = Application.class.getPackage().getImplementationVersion();
+		System.out.println("HELP: shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] (optional)[destinationFileSize] in MegaBytes");
 	}
 }

@@ -1,13 +1,23 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+/**
+ * 
+ */
 class ProcessManager {
 
 	private final AppProperties appProperties;
 
+	/**
+	 * 
+	 * @param args
+	 */
 	ProcessManager(String[] args) {
 		this.appProperties = new AppProperties(args);
 	}
 
+	/**
+	 * 
+	 */
 	void run() {
 		
 		SourceFile bigTextFile;
@@ -31,7 +41,7 @@ class ProcessManager {
 		}
 		
 		// All checking rules passed.
-		// Run Main Functionality of application.
+		// Running Main Functionality of application.
 		bigTextFile.shortenTo(appProperties.shorterTextFilePath, appProperties.shorterTextFileSize.bytes());
 	}
 }

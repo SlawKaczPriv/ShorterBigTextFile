@@ -9,8 +9,15 @@ import java.nio.file.Paths;
 
 public class Commons {
 
+	/** BigTextFile size = 1 188 888 897 bytes (1.10 GB) */
 	static final Path BIG_TEXT_FILE_PATH = Paths.get("src/test/resources/bigTextFile.txt");
 
+	/**
+	 * BigTextFile size = 1 188 888 897 bytes (1.10 GB)
+	 * 
+	 * @param bigTextFilePath
+	 * @throws Exception
+	 */
 	static void createBigTextFile(Path bigTextFilePath) throws Exception {
 		
 		if(! Files.exists(bigTextFilePath)) {
