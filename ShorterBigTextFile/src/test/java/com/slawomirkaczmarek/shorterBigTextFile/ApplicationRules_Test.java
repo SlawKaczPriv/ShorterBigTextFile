@@ -19,7 +19,7 @@ class ApplicationRules_Test {
 	}
 
 	@Test
-	void souceFileSize_lessThan_destinationFileSize_Test() throws Exception {
+	void sourceFileSize_lessThan_destinationFileSize_Test() throws Exception {
 		
 		// Given
 		String[] args = {Commons.BIG_TEXT_FILE_PATH.toString(), "blex", "1200"};
@@ -35,7 +35,7 @@ class ApplicationRules_Test {
 	}
 
 	@Test
-	void destinationFileSize_lessThan_souceFileSize_Test() throws Exception {
+	void destinationFileSize_lessThan_sourceFileSize_Test() throws Exception {
 		
 		// Given
 		String[] args = {Commons.BIG_TEXT_FILE_PATH.toString(), "destinationFilePath", "120"};
@@ -49,7 +49,7 @@ class ApplicationRules_Test {
 	}
 
 	@Test
-	void destinationFileDefaultSize_lessThan_souceFileSize_Test() throws Exception {
+	void destinationFileDefaultSize_lessThan_sourceFileSize_Test() throws Exception {
 		
 		// Given
 		String[] args = {Commons.BIG_TEXT_FILE_PATH.toString(), "destinationFilePath"};
@@ -65,7 +65,7 @@ class ApplicationRules_Test {
 
 
 	@Test
-	void souceFileNotExists_Test() throws Exception {
+	void sourceFileNotExists_Test() throws Exception {
 		
 		// Given
 		String[] args = {"fileNotExists", "destinationFilePath", "120"};
