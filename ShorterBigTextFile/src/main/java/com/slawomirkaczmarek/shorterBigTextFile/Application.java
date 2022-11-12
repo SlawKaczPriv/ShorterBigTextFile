@@ -4,29 +4,41 @@ public class Application {
 
 	public static void main(String[] args) {
 		
-		if(args.length < 1) {
-			System.out.println("No variables: source file path and output file path.");
-			System.out.println("Application EXIT.");
-			System.exit(1);
-		}else if(args.length == 1) {
-			if(args[0].equalsIgnoreCase("-help")) {
-				System.out.println("shorterBigTextFile-0.0.1-SNAPSHOT.jar [sourceFilePath] [destinationFilePath] (optional)[destinationFileSize] in MegaBytes");
-				System.exit(0);
-			}else {
-				System.out.println("No variable: output file path.");
-				System.out.println("Application EXIT.");
-				System.exit(1);
-			}
-		}else if(args.length > 3) {
-			System.out.println("To many variables");
-			System.out.println("Application EXIT.");
-			System.exit(1);
-		}
+		int argsAmount = args.length;
 		
-		new ProcessManager(args).run();
+		if(argsAmount == 2 || argsAmount == 3) {
+			new ProcessManager(args).run();
+		}else if(argsAmount == 0) {
+			System.out.println("No variables: source file path and output destination file path.");
+			printHelp();
+		}else if(argsAmount == 1) {
+			if(args[0].equalsIgnoreCase("-help")) {
+				printHelp();
+			}else {
+				System.out.println("No variable: output destination file path.");
+				printHelp();
+			}
+		}else {
+			System.out.println("To many variables");
+			printHelp();
+		}
 		
 		System.out.println("App END.");
 //		System.exit(0);
 		return;
+	}
+
+	private static void printHelp() {
+		
+		Package mainPackage = Application.class.getPackage();
+		String version = mainPackage.getImplementationVersion();
+//		String groupId = mainPackage.getName();
+//		String artifactId = mainPackage.getImplementationTitle();
+//		
+//		System.out.println(version);
+//		System.out.println(groupId);
+//		System.out.println(artifactId);
+//		
+		System.out.println("shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] (optional)[destinationFileSize] in MegaBytes");
 	}
 }

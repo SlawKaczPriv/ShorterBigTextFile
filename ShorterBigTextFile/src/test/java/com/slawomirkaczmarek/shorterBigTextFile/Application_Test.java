@@ -17,7 +17,7 @@ class Application_Test {
 		Commons.createBigTextFile(Commons.BIG_TEXT_FILE_PATH);
 	}
 
-//	@Disabled
+	@Disabled
 	@Test
 	public void testPrintProps() throws Exception {
 		
@@ -33,8 +33,7 @@ class Application_Test {
 //		Files.deleteIfExists(shortTextFilePath);
 		Commons.deleteIfExists(shortTextFilePath, "Application_Test");
 		
-		String[] args = new String[] {Commons.BIG_TEXT_FILE_PATH.toString(),
-				"src/test/resources/shortTextFile.txt", "2"};
+		String[] args = new String[] {Commons.BIG_TEXT_FILE_PATH.toString(), shortTextFilePath.toString(), "2"};
 		
 		Application.main(args);
 		
@@ -57,6 +56,8 @@ class Application_Test {
 		assertFalse(Files.exists(shortTextFilePath));
 	}
 
+
+	@Disabled
 	@Test
 	public void applicatin_Test_defaultSize() throws Exception {
 		

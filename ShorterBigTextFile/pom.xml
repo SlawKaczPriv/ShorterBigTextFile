@@ -26,6 +26,7 @@
                     <manifest>
                         <addClasspath>true</addClasspath>
                         <mainClass>com.slawomirkaczmarek.shorterBigTextFile.Application</mainClass>
+            			<addDefaultImplementationEntries>true</addDefaultImplementationEntries> <!-- https://igorski.co/how-to-get-the-pom-properties-at-runtime/ -->
                     </manifest>  
                 </archive>  
             </configuration>
