@@ -13,9 +13,6 @@ class FileSize {
 	/** 1_048_476 Bytes (1 MB) */
 	public static final int DEFAULT_SIZE = ONE_MEGA_BYTES;
 	
-	/** 2047 [MB] Mega Bytes */
-	public static final int MAX_MEGA_BYTES = Integer.MAX_VALUE / ONE_MEGA_BYTES;
-	
 	/** 1 [MB] Mega Bytes */
 	public static final int MIN_MEGA_BYTES = 1;
 	

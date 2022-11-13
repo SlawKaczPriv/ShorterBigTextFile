@@ -34,11 +34,12 @@ class ApplicationRules_Test {
 		// Given
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "4"};
 		AppProperties appProps = new AppProperties(args);
+		SourceFile bigTextFile = new SourceFile(appProps.bigTextFilePath);
 //		Files files = mock(Files.class);
 //		when(files.size(appProps.bigTextFilePath)).thenReturn((long) 2);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
 		
 		// Then
 		assertFalse(areSatisfied);
@@ -50,9 +51,10 @@ class ApplicationRules_Test {
 		// Given
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "3"};
 		AppProperties appProps = new AppProperties(args);
+		SourceFile bigTextFile = new SourceFile(appProps.bigTextFilePath);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
 		
 		// Then
 		assertFalse(areSatisfied);
@@ -64,9 +66,10 @@ class ApplicationRules_Test {
 		// Given
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "2"};
 		AppProperties appProps = new AppProperties(args);
+		SourceFile bigTextFile = new SourceFile(appProps.bigTextFilePath);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
 		
 		// Then
 		assertTrue(areSatisfied);
@@ -78,9 +81,10 @@ class ApplicationRules_Test {
 		// Given
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest"};
 		AppProperties appProps = new AppProperties(args);
+		SourceFile bigTextFile = new SourceFile(appProps.bigTextFilePath);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
 		
 		// Then
 		assertTrue(areSatisfied);
@@ -94,9 +98,10 @@ class ApplicationRules_Test {
 		// Given
 		String[] args = {"fileNotExists", "dest", "2"};
 		AppProperties appProps = new AppProperties(args);
+		SourceFile bigTextFile = new SourceFile(appProps.bigTextFilePath);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
 		
 		// Then
 		assertFalse(areSatisfied);

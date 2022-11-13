@@ -29,7 +29,7 @@ class BigTextFileRules_Test {
 	void areSatisfied_test_bigTextFileExists() throws Exception {
 
 		Commons.createTextFile(PATH_TO_FILE_3MB_SIZE, 3);
-		SourceFileImp bigTextFile = new SourceFileImp(PATH_TO_FILE_3MB_SIZE);
+		SourceFile bigTextFile = new SourceFile(PATH_TO_FILE_3MB_SIZE);
 		
 		assertTrue(BigTextFileRules.areSatisfied(bigTextFile));
 	}
@@ -38,7 +38,7 @@ class BigTextFileRules_Test {
 	void areSatisfied_test_bigTextFileToSmall() throws Exception {
 
 		Commons.createTextFile(PATH_TO_FILE_1MB_SIZE, 1);
-		SourceFileImp bigTextFile = new SourceFileImp(PATH_TO_FILE_1MB_SIZE);
+		SourceFile bigTextFile = new SourceFile(PATH_TO_FILE_1MB_SIZE);
 		
 		assertFalse(BigTextFileRules.areSatisfied(bigTextFile));
 	}
@@ -47,7 +47,7 @@ class BigTextFileRules_Test {
 	void areSatisfied_test_bigTextFileNotExists() throws Exception {
 		
 		Path fileNotExistsPath = Paths.get("bigTextFileNotExists");
-		SourceFileImp fileNotExists = new SourceFileImp(fileNotExistsPath);
+		SourceFile fileNotExists = new SourceFile(fileNotExistsPath);
 				
 		assertFalse(BigTextFileRules.areSatisfied(fileNotExists));
 	}

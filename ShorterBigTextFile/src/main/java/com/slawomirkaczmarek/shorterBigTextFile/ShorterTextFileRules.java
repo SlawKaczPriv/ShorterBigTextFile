@@ -8,6 +8,9 @@ import java.nio.file.Path;
  */
 class ShorterTextFileRules {
 	
+	/** 2047 [MB] Mega Bytes */
+	static final int MAX_MEGA_BYTES = Integer.MAX_VALUE / FileSize.ONE_MEGA_BYTES;
+	
 	// Public or default constructor is not needed.
 	// Prevents instantiation.
 	private ShorterTextFileRules() {}
@@ -28,9 +31,9 @@ class ShorterTextFileRules {
 		}
 		
 		double size = appProperties.shorterTextFileSize.megaBytes();
-		if(Double.compare(size, FileSize.MAX_MEGA_BYTES) > 0) {
+		if(Double.compare(size, MAX_MEGA_BYTES) > 0) {
 			System.out.println("To big NewShorterTextFile size. Max value:"
-					+ FileSize.MAX_MEGA_BYTES + " MB.");
+					+ MAX_MEGA_BYTES + " MB.");
 			return false;
 		}else if(Double.compare(size, FileSize.MIN_MEGA_BYTES) < 0) {
 			System.out.println("To small NewShorterTextFile size. Min value: "

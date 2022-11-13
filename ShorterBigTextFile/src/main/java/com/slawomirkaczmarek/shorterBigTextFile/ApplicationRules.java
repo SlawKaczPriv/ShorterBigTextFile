@@ -14,19 +14,13 @@ class ApplicationRules {
 
 	/**
 	 * 
+	 * @param bigTextFile 
 	 * @param appProperties 
 	 * @return
 	 */
-	static boolean areSatisfied(AppProperties appProperties) {
+	static boolean areSatisfied(SourceFile bigTextFile, AppProperties appProperties) {
 		
-		long bigTextFileSize;// = -1;
-		
-		try {
-			bigTextFileSize = Files.size(appProperties.bigTextFilePath);
-		} catch (IOException e) {
-			System.out.println("EXCEPTION from Files.size() for bigTextFile: " + e.getMessage());
-			return false;
-		}
+		long bigTextFileSize = bigTextFile.getSize();
 		
 		if(bigTextFileSize < appProperties.shorterTextFileSize.bytes()) {
 			System.out.println("Size of new short file is bigger than size of bigTextFile.");
