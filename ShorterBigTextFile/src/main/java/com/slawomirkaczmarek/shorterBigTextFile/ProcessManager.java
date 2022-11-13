@@ -20,13 +20,13 @@ class ProcessManager {
 	 */
 	void run() {
 		
-		SourceFile bigTextFile;
+		SourceFileImp bigTextFile;
 		
 		if(! appProperties.isSuccessfullyInitialized()) {
 			return;
 		}
 		
-		bigTextFile = new SourceFile(appProperties.bigTextFilePath);
+		bigTextFile = new SourceFileImp(appProperties.bigTextFilePath);
 		
 		if(! BigTextFileRules.areSatisfied(bigTextFile)) {
 			return;

@@ -14,7 +14,7 @@ class BigTextFileRules {
 	 * @param bigTextFile
 	 * @return
 	 */
-	static boolean areSatisfied(SourceFile bigTextFile) {
+	static boolean areSatisfied(SourceFileImp bigTextFile) {
 		
 		if(! bigTextFile.exists()) {
 			System.out.println("NOT exists BigTextFile: " + bigTextFile);
