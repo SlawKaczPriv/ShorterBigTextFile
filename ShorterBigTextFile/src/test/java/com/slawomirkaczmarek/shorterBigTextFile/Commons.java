@@ -30,6 +30,35 @@ public class Commons {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param textFilePath
+	 * @param megaByteSize
+	 * @throws Exception
+	 */
+	static void createTextFile(Path textFilePath, int megaByteSize) throws Exception {
+		
+		if(megaByteSize < 1) {
+			throw new IllegalArgumentException("megaByteSize < 1 ");
+		}
+		
+		long destinationSize = megaByteSize * FileSize.ONE_MEGA_BYTES;
+		
+		if(Files.exists(textFilePath)) {
+			long existingFileSize = Files.size(textFilePath);
+			if(existingFileSize == destinationSize) {
+				return;
+			}else {
+				Files.delete(textFilePath);}
+		}
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(textFilePath.toString()))){
+			for(long i = 0; i < destinationSize; i++) {
+				bw.write("a");
+			}
+		}
+	}
 
 	public static void deleteIfExists(Path shortTextFilePath, String info) {
 		
