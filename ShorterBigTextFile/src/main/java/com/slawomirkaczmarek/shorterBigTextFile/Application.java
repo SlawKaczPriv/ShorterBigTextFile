@@ -23,7 +23,7 @@ public class Application {
 			printHelp();
 		}
 		
-		System.out.println("App END.");
+		System.out.println("ShortTextFile app END.");
 //		System.exit(0);
 		return;
 	}

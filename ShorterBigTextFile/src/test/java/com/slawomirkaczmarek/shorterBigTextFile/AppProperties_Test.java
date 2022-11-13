@@ -81,13 +81,14 @@ class AppProperties_Test {
 	@Test
 	final void test5_test() {
 		
+		// Given
 		String[] args = new String[] {"source", "dest", "2.9"};
-		
 		AppProperties appProp = new AppProperties(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
 		FileSize fileSize = new FileSize(-1);
 		
+		// Then
 		assertFalse(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
 		assertEquals(dest, appProp.shorterTextFilePath);

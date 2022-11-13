@@ -32,7 +32,7 @@ class ApplicationRules_Test {
 	void sourceFileSize_lessThan_destinationFileSize_Test() throws Exception {
 		
 		// Given
-		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "blex", "4"};
+		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "4"};
 		AppProperties appProps = new AppProperties(args);
 //		Files files = mock(Files.class);
 //		when(files.size(appProps.bigTextFilePath)).thenReturn((long) 2);
@@ -48,7 +48,7 @@ class ApplicationRules_Test {
 	void sourceFileSize_equals_destinationFileSize_Test() throws Exception {
 		
 		// Given
-		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "blex", "3"};
+		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "3"};
 		AppProperties appProps = new AppProperties(args);
 		
 		// When
@@ -62,7 +62,7 @@ class ApplicationRules_Test {
 	void sourceFileSize_biggerThan_destinationFileSize_Test() throws Exception {
 		
 		// Given
-		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "destinationFilePath", "2"};
+		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "2"};
 		AppProperties appProps = new AppProperties(args);
 		
 		// When
@@ -76,7 +76,7 @@ class ApplicationRules_Test {
 	void destinationFileDefaultSize_lessThan_sourceFileSize_Test() throws Exception {
 		
 		// Given
-		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "destinationFilePath"};
+		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest"};
 		AppProperties appProps = new AppProperties(args);
 		
 		// When
@@ -92,7 +92,7 @@ class ApplicationRules_Test {
 	void sourceFileNotExists_Test() throws Exception {
 		
 		// Given
-		String[] args = {"fileNotExists", "destinationFilePath", "2"};
+		String[] args = {"fileNotExists", "dest", "2"};
 		AppProperties appProps = new AppProperties(args);
 		
 		// When

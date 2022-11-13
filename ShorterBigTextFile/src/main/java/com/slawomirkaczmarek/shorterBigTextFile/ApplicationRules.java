@@ -10,7 +10,7 @@ class ApplicationRules {
 
 	// Public or default constructor is not needed.
 	// Prevents instantiation.
-	private ApplicationRules() {}
+	private ApplicationRules() { }
 
 	/**
 	 * 
@@ -28,8 +28,11 @@ class ApplicationRules {
 			return false;
 		}
 		
-		if(bigTextFileSize <= appProperties.shorterTextFileSize.bytes()) {
+		if(bigTextFileSize < appProperties.shorterTextFileSize.bytes()) {
 			System.out.println("Size of new short file is bigger than size of bigTextFile.");
+			return false;
+		}else if(bigTextFileSize == appProperties.shorterTextFileSize.bytes()) {
+			System.out.println("Size of new short file is equals of bigTextFile size.");
 			return false;
 		}
 		
