@@ -71,7 +71,7 @@ class AppProperties {
 
 	private FileSize validateSize(BigInteger size) {
 		
-		BigInteger oneMegaBytes = new BigInteger(String.valueOf(FileSize.ONE_MEGA_BYTES));
+		BigInteger oneMegaBytes = new BigInteger(String.valueOf(MegaByte.ONE_MEGA_BYTES));
 		size = size.multiply(oneMegaBytes);
 		BigInteger maxSize = new BigInteger(String.valueOf(Long.MAX_VALUE));
 		

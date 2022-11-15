@@ -6,12 +6,9 @@ import java.util.Objects;
  * 
  */
 class FileSize {
-
-	/** 1_048_476 Bytes (1 MB) */
-	public static final int ONE_MEGA_BYTES = (int) Math.pow(2, 20);
 	
 	/** 1_048_476 Bytes (1 MB) */
-	public static final int DEFAULT_SIZE = ONE_MEGA_BYTES;
+	public static final int DEFAULT_SIZE = MegaByte.ONE_MEGA_BYTES;
 	
 	/** 1 [MB] Mega Bytes */
 	public static final int MIN_MEGA_BYTES = 1;
@@ -26,7 +23,7 @@ class FileSize {
 	FileSize(long bytes) {
 		
 		this.bytes = bytes;
-		this.megaBytes = bytes / ONE_MEGA_BYTES;
+		this.megaBytes = bytes / MegaByte.ONE_MEGA_BYTES;
 	}
 
 	/**

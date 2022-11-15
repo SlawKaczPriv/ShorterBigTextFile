@@ -38,7 +38,7 @@ class Application_Test {
 		Application.main(args);
 		
 		assertTrue(Files.exists(shortTextFilePath));
-		assertEquals(2, Files.size(shortTextFilePath) / FileSize.ONE_MEGA_BYTES);
+		assertEquals(2, Files.size(shortTextFilePath) / MegaByte.ONE_MEGA_BYTES);
 	}
 	
 	@Disabled
@@ -70,6 +70,14 @@ class Application_Test {
 		Application.main(args);
 		
 		assertTrue(Files.exists(shortTextFilePath));
-		assertEquals(1, Files.size(shortTextFilePath) / FileSize.ONE_MEGA_BYTES);
+		assertEquals(1, Files.size(shortTextFilePath) / MegaByte.ONE_MEGA_BYTES);
 	}
+	
+//	@Test
+//	public void megaBytesMaxValue() throws Exception {
+//		
+//		long MAX_VALUE = Long.MAX_VALUE / ((int) Math.pow(2, 20));
+//		System.out.println("Long max val = " + Long.MAX_VALUE);
+//		System.out.println("megaBytesMaxValue=" + MAX_VALUE);
+//	}
 }

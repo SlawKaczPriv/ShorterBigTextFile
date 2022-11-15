@@ -70,7 +70,7 @@ class AppProperties_Test {
 		AppProperties appProp = new AppProperties(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
-		FileSize fileSize = new FileSize(2 * FileSize.ONE_MEGA_BYTES);
+		FileSize fileSize = new FileSize(2 * MegaByte.ONE_MEGA_BYTES);
 		
 		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.bigTextFilePath);
