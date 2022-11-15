@@ -13,26 +13,34 @@ class MegaByte {
 	private final long megaByteValue;
 	private final long byteValue;
 	
-	private final boolean successfullyInitialized;
-	
 	/**
 	 * 
 	 * @param megaByteValue
+	 * @throws IllegalArgumentException
 	 */
-	MegaByte(long megaByteValue) {
+	MegaByte(long megaByteValue) throws IllegalArgumentException {
 		
 		if(megaByteValue < 0) {
 			this.megaByteValue = -1;
 			this.byteValue = -1;
-			this.successfullyInitialized = false;
+			throw new IllegalArgumentException("Argument value have to be between 0 and " + MAX_VALUE);
+//			logger.warning("The value is not valid. Min value: 0");
 		}else if(megaByteValue > MAX_VALUE) {
 			this.megaByteValue = -1;
 			this.byteValue = -1;
-			this.successfullyInitialized = false;
+			throw new IllegalArgumentException("Argument value have to be between 0 and " + MAX_VALUE);
+//			logger.warning("The value is not valid. Max value: " + MAX_VALUE);
 		}else {
 			this.megaByteValue = megaByteValue;
 			this.byteValue = megaByteValue * ONE_MEGA_BYTES;
-			this.successfullyInitialized = true;
 		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	long getBytes() {
+		return byteValue;
 	}
 }

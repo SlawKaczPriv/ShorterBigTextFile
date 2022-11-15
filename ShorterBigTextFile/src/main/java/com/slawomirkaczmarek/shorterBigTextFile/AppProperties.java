@@ -56,9 +56,9 @@ class AppProperties {
 		
 		if(args.length == 3) {
 			try {
-				BigInteger size = new BigInteger(args[2]);
-				return validateSize(size);
-			}catch (NumberFormatException e) {
+				MegaByte megaBytes = new MegaByte(new BigInteger(args[2]).longValue());
+				return new FileSize(megaBytes);
+			}catch (IllegalArgumentException e) {
 				System.out.println("ERROR Property size of NewShorterTextFile is not valid. Message: "
 						+ e.getMessage());
 				this.successfullyInitialized = false;
@@ -66,22 +66,6 @@ class AppProperties {
 			}
 		}else {
 			return defaultSize();
-		}
-	}
-	
-	private FileSize validateSize(BigInteger size) {
-		
-		BigInteger oneMegaBytes = new BigInteger(String.valueOf(MegaByte.ONE_MEGA_BYTES));
-		size = size.multiply(oneMegaBytes);
-		BigInteger maxSizeBytes = new BigInteger(String.valueOf(Long.MAX_VALUE));
-		
-		if(size.compareTo(new BigInteger("0")) > 0 && size.compareTo(maxSizeBytes) <= 0) {
-			return new FileSize(size.longValue());
-		}else {
-			System.out.println("ERROR Property size of NewShorterTextFile is not valid."
-					+ " The value should be between 1 and " + MegaByte.MAX_VALUE);
-			this.successfullyInitialized = false;
-			return new FileSize(-1);
 		}
 	}
 

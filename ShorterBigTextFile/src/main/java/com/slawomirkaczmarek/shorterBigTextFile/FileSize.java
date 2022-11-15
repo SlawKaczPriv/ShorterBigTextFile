@@ -27,8 +27,14 @@ class FileSize {
 			this.megaBytes = -1.0;
 		}else {
 			this.bytes = bytes;
-			this.megaBytes = bytes / MegaByte.ONE_MEGA_BYTES;
+			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
 		}
+	}
+	
+	FileSize(MegaByte megaBytes) {
+		
+			this.bytes = megaBytes.getBytes();
+			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
 	}
 
 	/**
