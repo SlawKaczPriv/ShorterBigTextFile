@@ -94,4 +94,21 @@ class AppProperties_Test {
 		assertEquals(dest, appProp.shorterTextFilePath);
 		assertEquals(fileSize, appProp.shorterTextFileSize);
 	}
+
+	@Test
+	final void test6_toBigDestinationFileSizeInMegaBytes() {
+		
+		// Given
+		String[] args = new String[] {"source", "dest", "8796093022208"};
+		AppProperties appProp = new AppProperties(args);
+		Path source = Paths.get("source");
+		Path dest = Paths.get("dest");
+		FileSize fileSize = new FileSize(-1);
+		
+		// Then
+		assertFalse(appProp.isSuccessfullyInitialized());
+		assertEquals(source, appProp.bigTextFilePath);
+		assertEquals(dest, appProp.shorterTextFilePath);
+		assertEquals(fileSize, appProp.shorterTextFileSize);
+	}
 }

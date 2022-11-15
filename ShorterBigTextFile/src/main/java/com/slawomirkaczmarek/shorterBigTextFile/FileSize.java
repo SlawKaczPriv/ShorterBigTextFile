@@ -11,7 +11,7 @@ class FileSize {
 	public static final int DEFAULT_SIZE = MegaByte.ONE_MEGA_BYTES;
 	
 	/** 1 [MB] Mega Bytes */
-	public static final int MIN_MEGA_BYTES = 1;
+//	public static final int MIN_MEGA_BYTES = 1;
 	
 	private final long bytes;
 	private final double megaBytes;
@@ -22,8 +22,13 @@ class FileSize {
 	 */
 	FileSize(long bytes) {
 		
-		this.bytes = bytes;
-		this.megaBytes = bytes / MegaByte.ONE_MEGA_BYTES;
+		if(bytes < 0) {
+			this.bytes = -1;
+			this.megaBytes = -1.0;
+		}else {
+			this.bytes = bytes;
+			this.megaBytes = bytes / MegaByte.ONE_MEGA_BYTES;
+		}
 	}
 
 	/**

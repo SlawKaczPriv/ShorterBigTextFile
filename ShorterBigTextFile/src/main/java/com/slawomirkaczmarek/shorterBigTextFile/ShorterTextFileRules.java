@@ -35,11 +35,11 @@ class ShorterTextFileRules {
 		double size = appProperties.shorterTextFileSize.megaBytes();
 		if(Double.compare(size, UPPER_LIMIT) > 0) {
 			System.out.println("To big NewShorterTextFile size. Max value:"
-					+ MegaByte.MAX_VALUE + " MB.");
+					+ UPPER_LIMIT + " MB.");
 			return false;
 		}else if(Double.compare(size, LOWER_LIMIT) < 0) {
 			System.out.println("To small NewShorterTextFile size. Min value: "
-					+ FileSize.MIN_MEGA_BYTES + " MB. Requested size: " + size);
+					+ LOWER_LIMIT + " MB. Requested size: " + size);
 			return false;
 		}
 	

@@ -13,6 +13,8 @@ class MegaByte {
 	private final long megaByteValue;
 	private final long byteValue;
 	
+	private final boolean successfullyInitialized;
+	
 	/**
 	 * 
 	 * @param megaByteValue
@@ -22,12 +24,15 @@ class MegaByte {
 		if(megaByteValue < 0) {
 			this.megaByteValue = -1;
 			this.byteValue = -1;
+			this.successfullyInitialized = false;
 		}else if(megaByteValue > MAX_VALUE) {
 			this.megaByteValue = -1;
 			this.byteValue = -1;
+			this.successfullyInitialized = false;
 		}else {
 			this.megaByteValue = megaByteValue;
 			this.byteValue = megaByteValue * ONE_MEGA_BYTES;
+			this.successfullyInitialized = true;
 		}
 	}
 }
