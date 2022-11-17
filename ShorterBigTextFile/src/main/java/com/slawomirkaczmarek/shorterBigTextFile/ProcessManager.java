@@ -34,11 +34,9 @@ class ProcessManager {
 			return;
 		}
 		
-//		destinationTextFile = new DestinationFile(arguments.shorterTextFilePath, arguments.shorterTextFileSize);
 		FileSize fileSize = new FileSize(arguments.megaBytes);
 		destinationTextFile = new DestinationFile(arguments.destinationFilePath, fileSize);
 		
-//		if(! ShorterTextFileRules.areSatisfied(arguments)) {
 		if(! ShorterTextFileRules.areSatisfied(destinationTextFile)) {
 			return;
 		}
@@ -49,7 +47,6 @@ class ProcessManager {
 		
 		// All checking rules passed.
 		// Running Main Functionality of application.
-//		bigTextFile.shortenTo(arguments.shorterTextFilePath, arguments.shorterTextFileSize.bytes());
 		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.bytes());
 	}
 }
