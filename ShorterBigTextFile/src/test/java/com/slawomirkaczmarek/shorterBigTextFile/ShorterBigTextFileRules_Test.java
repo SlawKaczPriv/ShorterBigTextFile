@@ -15,18 +15,26 @@ class ShorterBigTextFileRules_Test {
 	@Test
 	void areSatisfied_test_newFileSizeToBig() throws Exception {
 		
+		// Given
 		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT + 1)};
-		AppProperties appProps = new AppProperties(args);
-		assertFalse(ShorterTextFileRules.areSatisfied(appProps));
+		Arguments appProps = new Arguments(args);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
+		
+		
+		assertFalse(ShorterTextFileRules.areSatisfied(destinationTextFile));
 	}
 
 	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeMaxSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT)};
-		AppProperties appProps = new AppProperties(args);
-		assertTrue(ShorterTextFileRules.areSatisfied(appProps));
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT / MegaByte.ONE_MEGA_BYTES)};
+		Arguments appProps = new Arguments(args);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
+		
+		assertTrue(ShorterTextFileRules.areSatisfied(destinationTextFile));
 	}
 	
 	// Edge case
@@ -34,16 +42,22 @@ class ShorterBigTextFileRules_Test {
 	void areSatisfied_test_newFileSizeToSmall() throws Exception {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT - 1)};
-		AppProperties appProps = new AppProperties(args);
-		assertFalse(ShorterTextFileRules.areSatisfied(appProps));
+		Arguments appProps = new Arguments(args);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
+		
+		assertFalse(ShorterTextFileRules.areSatisfied(destinationTextFile));
 	}
 	
 	// Edge case
 	@Test
 	void areSatisfied_test_newFileSizeMinSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT)};
-		AppProperties appProps = new AppProperties(args);
-		assertTrue(ShorterTextFileRules.areSatisfied(appProps));
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT / MegaByte.ONE_MEGA_BYTES)};
+		Arguments appProps = new Arguments(args);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
+		
+		assertTrue(ShorterTextFileRules.areSatisfied(destinationTextFile));
 	}
 }

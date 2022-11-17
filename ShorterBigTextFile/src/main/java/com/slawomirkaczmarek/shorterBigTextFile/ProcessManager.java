@@ -5,14 +5,14 @@ package com.slawomirkaczmarek.shorterBigTextFile;
  */
 class ProcessManager {
 
-	private final AppProperties appProperties;
+	private final Arguments arguments;
 
 	/**
 	 * 
 	 * @param args
 	 */
 	ProcessManager(String[] args) {
-		this.appProperties = new AppProperties(args);
+		this.arguments = new Arguments(args);
 	}
 
 	/**
@@ -21,27 +21,35 @@ class ProcessManager {
 	void run() {
 		
 		SourceFile bigTextFile;
+		DestinationFile destinationTextFile;
 		
-		if(! appProperties.isSuccessfullyInitialized()) {
+		if(! arguments.isSuccessfullyInitialized()) {
+			System.out.println("Something went wrong. See log file. Application Exit.");
 			return;
 		}
 		
-		bigTextFile = new SourceFile(appProperties.bigTextFilePath);
+		bigTextFile = new SourceFile(arguments.sourceFilePath);
 		
 		if(! BigTextFileRules.areSatisfied(bigTextFile)) {
 			return;
 		}
 		
-		if(! ShorterTextFileRules.areSatisfied(appProperties)) {
+//		destinationTextFile = new DestinationFile(arguments.shorterTextFilePath, arguments.shorterTextFileSize);
+		FileSize fileSize = new FileSize(arguments.megaBytes);
+		destinationTextFile = new DestinationFile(arguments.destinationFilePath, fileSize);
+		
+//		if(! ShorterTextFileRules.areSatisfied(arguments)) {
+		if(! ShorterTextFileRules.areSatisfied(destinationTextFile)) {
 			return;
 		}
 		
-		if(! ApplicationRules.areSatisfied(bigTextFile, appProperties)) {
+		if(! ApplicationRules.areSatisfied(bigTextFile, arguments)) {
 			return;
 		}
 		
 		// All checking rules passed.
 		// Running Main Functionality of application.
-		bigTextFile.shortenTo(appProperties.shorterTextFilePath, appProperties.shorterTextFileSize.bytes());
+//		bigTextFile.shortenTo(arguments.shorterTextFilePath, arguments.shorterTextFileSize.bytes());
+		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.bytes());
 	}
 }

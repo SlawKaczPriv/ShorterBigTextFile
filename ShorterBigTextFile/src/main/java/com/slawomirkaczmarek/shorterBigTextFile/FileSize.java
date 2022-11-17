@@ -10,31 +10,31 @@ class FileSize {
 	/** 1_048_476 Bytes (1 MB) */
 	public static final int DEFAULT_SIZE = MegaByte.ONE_MEGA_BYTES;
 	
-	/** 1 [MB] Mega Bytes */
-//	public static final int MIN_MEGA_BYTES = 1;
-	
 	private final long bytes;
-	private final double megaBytes;
+//	private final double megaBytes;
+	private final MegaByte megaBytes;
 
 	/**
 	 * 
 	 * @param bytes
+	 * @throws IllegalArgumentException
 	 */
-	FileSize(long bytes) {
+	FileSize(long bytes) throws IllegalArgumentException {
 		
 		if(bytes < 0) {
-			this.bytes = -1;
-			this.megaBytes = -1.0;
+			throw new IllegalArgumentException("FileSize argument value have to positive number or 0.");
 		}else {
 			this.bytes = bytes;
-			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
+//			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
+			this.megaBytes = new MegaByte(bytes);
 		}
 	}
 	
 	FileSize(MegaByte megaBytes) {
 		
 			this.bytes = megaBytes.getBytes();
-			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
+//			this.megaBytes = (double) bytes / MegaByte.ONE_MEGA_BYTES;
+			this.megaBytes = megaBytes;
 	}
 
 	/**
@@ -42,7 +42,7 @@ class FileSize {
 	 * @return
 	 */
 	double megaBytes() {
-		return megaBytes;
+		return megaBytes.getValue();
 	}
 
 	/**
@@ -70,12 +70,28 @@ class FileSize {
 		}
 		
 		FileSize other = (FileSize) obj;
-		return bytes == other.bytes &&
-				Double.doubleToLongBits(megaBytes) == Double.doubleToLongBits(other.megaBytes);
+		return bytes == other.bytes;// &&
+//				Double.doubleToLongBits(megaBytes) == Double.doubleToLongBits(other.megaBytes);
 	}
 
 	@Override
 	public String toString() {
 		return "FileSize [bytes=" + bytes + ", megaBytes=" + megaBytes + "]";
+	}
+
+	/**
+	 * 
+	 * @param upperLimit
+	 * @return
+	 */
+	int compareTo(int bytesToCompare) {
+		
+		if(this.bytes < bytesToCompare) {
+			return -1;
+		}else if(this.bytes > bytesToCompare) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 }
