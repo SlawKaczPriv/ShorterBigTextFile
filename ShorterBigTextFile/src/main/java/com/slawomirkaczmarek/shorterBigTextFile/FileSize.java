@@ -94,4 +94,20 @@ class FileSize {
 			return 0;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param other
+	 * @return
+	 */
+	int compareTo(FileSize other) {
+		
+		if(this.bytes < other.bytes) {
+			return -1;
+		}else if(this.bytes > other.bytes) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 }

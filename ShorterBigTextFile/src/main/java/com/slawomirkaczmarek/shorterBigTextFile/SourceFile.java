@@ -16,6 +16,7 @@ class SourceFile {
 	private final boolean exists;
 	// Bytes
 	private final long size;
+	private final FileSize fileSize;
 
 	/**
 	 * 
@@ -26,6 +27,7 @@ class SourceFile {
 		this.path = path;
 		this.exists = exists(path);
 		this.size = size(path);
+		this.fileSize = fileSize(path);
 	}
 
 	private boolean exists(Path path) {
@@ -62,14 +64,29 @@ class SourceFile {
 			return -1;
 		}
 	}
+
+	private FileSize fileSize(Path path) {
+		
+		if(! this.exists) {
+			return new FileSize(0);
+		}
+		
+		try {
+			long size = Files.size(path);
+			return new FileSize(size);
+		}catch (Exception e) {
+			System.out.println("EXCEPTION from SourceFile Files.size(): " + e.getMessage());
+			return new FileSize(0);
+		}
+	}
 	
 	/**
 	 * 
 	 * @return Bytes
 	 */
-	public long getSize() {
-		return size;
-	}
+//	public long getSize() {
+//		return size;
+//	}
 
 	/**
 	 * MAIN FUNCTIONALITY of application.
@@ -102,5 +119,13 @@ class SourceFile {
 	@Override
 	public String toString() {
 		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + size + " bytes]";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	FileSize size() {
+		return fileSize;
 	}
 }

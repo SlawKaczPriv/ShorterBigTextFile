@@ -1,5 +1,7 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+import java.nio.file.Path;
+
 /**
  * 
  */
@@ -22,6 +24,7 @@ class ProcessManager {
 		
 		SourceFile bigTextFile;
 		DestinationFile destinationTextFile;
+		FileSize fileSize;
 		
 		if(! arguments.isSuccessfullyInitialized()) {
 			System.out.println("Something went wrong. See log file. Application Exit.");
@@ -34,14 +37,14 @@ class ProcessManager {
 			return;
 		}
 		
-		FileSize fileSize = new FileSize(arguments.megaBytes);
+		fileSize = new FileSize(arguments.megaBytes);
 		destinationTextFile = new DestinationFile(arguments.destinationFilePath, fileSize);
 		
 		if(! ShorterTextFileRules.areSatisfied(destinationTextFile)) {
 			return;
 		}
 		
-		if(! ApplicationRules.areSatisfied(bigTextFile, arguments)) {
+		if(! ApplicationRules.areSatisfied(bigTextFile, destinationTextFile)) {
 			return;
 		}
 		

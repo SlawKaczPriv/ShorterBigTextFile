@@ -1,20 +1,13 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 /**
  * 
  */
 class ShorterTextFileRules {
 	
 //	/** 2047 [MB] Mega Bytes */
-//	static final int UPPER_LIMIT = Integer.MAX_VALUE / MegaByte.ONE_MEGA_BYTES;
-//	/** 1 [MB] Mega Bytes */
-//	static final int LOWER_LIMIT = 1;
-	/** 2047 [MB] Mega Bytes */
 	static final int UPPER_LIMIT = Integer.MAX_VALUE;
-	/** 1 [MB] Mega Bytes */
+//	/** 1 [MB] Mega Bytes */
 	static final int LOWER_LIMIT = MegaByte.ONE_MEGA_BYTES;
 	
 	// Public or default constructor is not needed.
@@ -33,7 +26,7 @@ class ShorterTextFileRules {
 		}
 		
 //		double size = appProperties.shorterTextFileSize.megaBytes();
-		int comparing = destinationTextFile.size().compareTo(UPPER_LIMIT);
+//		int comparing = destinationTextFile.size().compareTo(UPPER_LIMIT);
 		if(destinationTextFile.size().compareTo(UPPER_LIMIT) > 0) {
 			System.out.println("To big NewShorterTextFile size. Max value:"
 					+ UPPER_LIMIT + " Bytes. Requested size: " + destinationTextFile.size().bytes() + " Bytes");

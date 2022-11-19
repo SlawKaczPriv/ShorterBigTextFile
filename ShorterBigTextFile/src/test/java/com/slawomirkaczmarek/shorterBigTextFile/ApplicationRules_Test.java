@@ -37,9 +37,11 @@ class ApplicationRules_Test {
 		SourceFile bigTextFile = new SourceFile(appProps.sourceFilePath);
 //		Files files = mock(Files.class);
 //		when(files.size(appProps.bigTextFilePath)).thenReturn((long) 2);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, destinationTextFile);
 		
 		// Then
 		assertFalse(areSatisfied);
@@ -52,9 +54,11 @@ class ApplicationRules_Test {
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "3"};
 		Arguments appProps = new Arguments(args);
 		SourceFile bigTextFile = new SourceFile(appProps.sourceFilePath);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, destinationTextFile);
 		
 		// Then
 		assertFalse(areSatisfied);
@@ -67,9 +71,11 @@ class ApplicationRules_Test {
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest", "2"};
 		Arguments appProps = new Arguments(args);
 		SourceFile bigTextFile = new SourceFile(appProps.sourceFilePath);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, destinationTextFile);
 		
 		// Then
 		assertTrue(areSatisfied);
@@ -82,9 +88,11 @@ class ApplicationRules_Test {
 		String[] args = {PATH_TO_FILE_3MB_SIZE.toString(), "dest"};
 		Arguments appProps = new Arguments(args);
 		SourceFile bigTextFile = new SourceFile(appProps.sourceFilePath);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, destinationTextFile);
 		
 		// Then
 		assertTrue(areSatisfied);
@@ -99,9 +107,11 @@ class ApplicationRules_Test {
 		String[] args = {"fileNotExists", "dest", "2"};
 		Arguments appProps = new Arguments(args);
 		SourceFile bigTextFile = new SourceFile(appProps.sourceFilePath);
+		FileSize fileSize = new FileSize(appProps.megaBytes);
+		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		// When
-		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, appProps);
+		boolean areSatisfied = ApplicationRules.areSatisfied(bigTextFile, destinationTextFile);
 		
 		// Then
 		assertFalse(areSatisfied);
