@@ -31,7 +31,7 @@ public class Application {
 			}
 		}else if(argsAmount == 0) {
 			
-			System.out.println("No variables: source file path and output destination file path.");
+			System.out.println("No variables: source file path, destination file path and optionally size of destination file.");
 			printHelp();
 		}else {
 			
@@ -59,6 +59,11 @@ public class Application {
 		String version = Application.class.getPackage().getImplementationVersion();
 		System.out.println("-help:"
 				+ System.lineSeparator() + "\t" + "shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] [destinationFileSize] (in MegaBytes)"
-				+ System.lineSeparator() + "\t" + "shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] default size will be used");
+				+ System.lineSeparator() + "\t" + "shorterBigTextFile-" + version + ".jar [sourceFilePath] [destinationFilePath] default size will be used"
+				+ System.lineSeparator()
+				+ System.lineSeparator() + "\t" + "Examples:"
+				+ System.lineSeparator() + "\t" + "java -jar shorterBigTextFile-" + version + ".jar c:\\sourceBigTxtFile.txt c:\\destination.txt 2"
+				+ System.lineSeparator() + "\t" + "For Windows system if not set JAVA_HOME:"
+				+ System.lineSeparator() + "\t" + "C:\\\"Program Files\"\\Java\\jdk-15.0.2\\bin\\java.exe -jar shorterBigTextFile-" + version + ".jar c:\\sourceBigTxtFile.txt c:\\destination.txt 2");
 	}
 }
