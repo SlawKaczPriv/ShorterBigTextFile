@@ -1,7 +1,5 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
-import java.nio.file.Path;
-
 /**
  * 
  */

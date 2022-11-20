@@ -12,7 +12,7 @@ public class Application {
 				new ProcessManager(args).run(); // Running application.
 //				System.out.println("ShortTextFile app END.");
 			}else {
-				System.out.println("Argument destinationFileSize is not integer number.");
+				System.out.println("Argument size of destination file is not integer number.");
 				printHelp();
 			}
 			
@@ -26,12 +26,12 @@ public class Application {
 			if(args[0].equalsIgnoreCase("-help")) {
 				printHelp();
 			}else {
-				System.out.println("No variable: output destination file path.");
+				System.out.println("No variable: path of destination file.");
 				printHelp();
 			}
 		}else if(argsAmount == 0) {
 			
-			System.out.println("No variables: source file path, destination file path and optionally size of destination file.");
+			System.out.println("No variables: path of source file, path of destination file and optionally size of destination file.");
 			printHelp();
 		}else {
 			
