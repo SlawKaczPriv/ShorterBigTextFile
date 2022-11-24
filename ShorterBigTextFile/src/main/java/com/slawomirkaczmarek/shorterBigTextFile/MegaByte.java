@@ -6,16 +6,14 @@ import java.util.Objects;
  * 
  */
 class MegaByte {
-
-	/** 1_048_476 Bytes */
-	public static final int ONE_MEGA_BYTES = (int) Math.pow(2, 20);
+	
 	/** 0 */
 	public static final long MIN_VALUE = 0;
 	/** 8_796_093_022_207 [MB] Mega Bytes */
-	public static final long MAX_VALUE = Long.MAX_VALUE / ONE_MEGA_BYTES;
+	public static final long MAX_VALUE = Long.MAX_VALUE / Bytes.ONE_MEGA_BYTE.value();
 	
 	private final double megaByteValue;
-	private final long byteValue;
+	private final Bytes byteValue;
 
 	/**
 	 * 
@@ -31,28 +29,22 @@ class MegaByte {
 			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + MAX_VALUE);
 		}else {
 			this.megaByteValue = result;
-			this.byteValue = result * ONE_MEGA_BYTES;
+			this.byteValue = new Bytes(result * Bytes.ONE_MEGA_BYTE.value());
 		}
 	}
 
 	
-	MegaByte(long bytes) throws IllegalArgumentException{
+	MegaByte(Bytes bytes) {
 		
-		if(bytes < MIN_VALUE) {
-			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + (MAX_VALUE * ONE_MEGA_BYTES));
-		}else if(bytes > MAX_VALUE * ONE_MEGA_BYTES) {
-			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + (MAX_VALUE * ONE_MEGA_BYTES));
-		}else {
-			this.megaByteValue = (double) bytes / ONE_MEGA_BYTES;
-			this.byteValue = bytes;
-		}
+		this.megaByteValue = (double) bytes.value() / Bytes.ONE_MEGA_BYTE.value();
+		this.byteValue = bytes;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	long getBytes() {
+	Bytes getBytes() {
 		return byteValue;
 	}
 	
@@ -64,13 +56,11 @@ class MegaByte {
 		return megaByteValue;
 	}
 
-
 	@Override
 	public int hashCode() {
 		
 		return Objects.hash(byteValue);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -85,7 +75,11 @@ class MegaByte {
 			return false;
 		}
 		MegaByte other = (MegaByte) obj;
-		return byteValue == other.byteValue;
+		return this.byteValue.equals(other.byteValue);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MegaByte [megaByteValue=" + megaByteValue + ", byteValue=" + byteValue.value() + "]";
+	}
 }

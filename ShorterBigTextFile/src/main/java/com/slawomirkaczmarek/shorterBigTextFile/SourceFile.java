@@ -25,15 +25,15 @@ class SourceFile extends File {
 	private FileSize fileSize(Path path) {
 		
 		if(! this.exists) {
-			return new FileSize(0);
+			return new FileSize(new Bytes(0));
 		}
 		
 		try {
 			long size = Files.size(path);
-			return new FileSize(size);
+			return new FileSize(new Bytes(size));
 		}catch (Exception e) {
 			System.out.println("EXCEPTION from SourceFile Files.size(): " + e.getMessage());
-			return new FileSize(0);
+			return new FileSize(new Bytes(0));
 		}
 	}
 

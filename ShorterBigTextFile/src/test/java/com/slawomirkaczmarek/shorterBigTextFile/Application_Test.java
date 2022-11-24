@@ -38,7 +38,7 @@ class Application_Test {
 		Application.main(args);
 		
 		assertTrue(Files.exists(shortTextFilePath));
-		assertEquals(2, Files.size(shortTextFilePath) / MegaByte.ONE_MEGA_BYTES);
+		assertEquals(2, Files.size(shortTextFilePath) / Bytes.ONE_MEGA_BYTE.value());
 	}
 	
 	@Disabled
@@ -70,7 +70,7 @@ class Application_Test {
 		Application.main(args);
 		
 		assertTrue(Files.exists(shortTextFilePath));
-		assertEquals(1, Files.size(shortTextFilePath) / MegaByte.ONE_MEGA_BYTES);
+		assertEquals(1, Files.size(shortTextFilePath) / Bytes.ONE_MEGA_BYTE.value());
 	}
 	
 //	@Test

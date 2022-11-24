@@ -6,9 +6,9 @@ package com.slawomirkaczmarek.shorterBigTextFile;
 class ShorterTextFileRules {
 	
 //	/** 2047 [MB] Mega Bytes */
-	static final int UPPER_LIMIT = Integer.MAX_VALUE;
+	static final Bytes UPPER_LIMIT = new Bytes(Integer.MAX_VALUE);
 //	/** 1 [MB] Mega Bytes */
-	static final int LOWER_LIMIT = MegaByte.ONE_MEGA_BYTES;
+	static final Bytes LOWER_LIMIT = Bytes.ONE_MEGA_BYTE;
 	
 	// Public or default constructor is not needed.
 	// Prevents instantiation.

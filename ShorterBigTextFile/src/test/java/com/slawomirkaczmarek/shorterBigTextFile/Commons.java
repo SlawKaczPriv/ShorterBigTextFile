@@ -43,7 +43,7 @@ public class Commons {
 			throw new IllegalArgumentException("megaByteSize < 1 ");
 		}
 		
-		long destinationSize = megaByteSize * MegaByte.ONE_MEGA_BYTES;
+		long destinationSize = megaByteSize * Bytes.ONE_MEGA_BYTE.value();
 		
 		if(Files.exists(textFilePath)) {
 			long existingFileSize = Files.size(textFilePath);
