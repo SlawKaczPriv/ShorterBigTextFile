@@ -10,59 +10,16 @@ import java.nio.file.Path;
 /**
  * The Class with MAIN FUNCTIONALITY of application.
  */
-class SourceFile {
-
-	private final Path path;
-	private final boolean exists;
-	// Bytes
-	private final long size;
-	private final FileSize fileSize;
-
+class SourceFile extends File {
+	
 	/**
 	 * 
 	 * @param path
 	 */
 	SourceFile(Path path) {
 		
-		this.path = path;
-		this.exists = exists(path);
-		this.size = size(path);
+		super(path);
 		this.fileSize = fileSize(path);
-	}
-
-	private boolean exists(Path path) {
-		
-		try {
-			if(Files.exists(path)) {
-				return true;
-			}else {
-				return false;}
-		}catch (SecurityException e) {
-			System.out.println("EXCEPTION from SourceFile Files.exists(): " + e.getMessage());
-			return false;
-		}
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean exists() {
-		return exists;
-	}
-	
-	private long size(Path path) {
-		
-		if(! this.exists) {
-			return -1;
-		}
-		
-		try {
-			return Files.size(path);
-		}catch (Exception e) {
-			System.out.println("EXCEPTION from SourceFile Files.size(): " + e.getMessage());
-			return -1;
-		}
 	}
 
 	private FileSize fileSize(Path path) {
@@ -79,14 +36,6 @@ class SourceFile {
 			return new FileSize(0);
 		}
 	}
-	
-	/**
-	 * 
-	 * @return Bytes
-	 */
-//	public long getSize() {
-//		return size;
-//	}
 
 	/**
 	 * MAIN FUNCTIONALITY of application.
@@ -114,18 +63,5 @@ class SourceFile {
 			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());
 			return false;
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + size + " bytes]";
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	FileSize size() {
-		return fileSize;
 	}
 }

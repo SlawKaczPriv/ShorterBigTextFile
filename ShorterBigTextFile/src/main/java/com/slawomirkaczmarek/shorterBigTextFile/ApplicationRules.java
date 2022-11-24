@@ -18,7 +18,7 @@ class ApplicationRules {
 	static boolean areSatisfied(SourceFile bigTextFile, DestinationFile destinationTextFile) {
 		
 //		long bigTextFileSize = bigTextFile.getSize();
-		int comparing = bigTextFile.size().compareTo(destinationTextFile.size());
+		int comparing = bigTextFile.getSize().compareTo(destinationTextFile.getSize());
 		if(comparing < 0) {
 //		if(bigTextFileSize < appProperties.megaBytes.getBytes()) {
 			System.out.println("Size of new short file is bigger than size of bigTextFile.");

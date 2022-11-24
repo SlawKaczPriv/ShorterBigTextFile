@@ -14,10 +14,7 @@ class ShorterTextFileRules {
 	// Prevents instantiation.
 	private ShorterTextFileRules() {}
 	
-//	static boolean areSatisfied(Arguments appProperties){
 	static boolean areSatisfied(DestinationFile destinationTextFile){
-		
-//		Path path = appProperties.shorterTextFilePath;
 		
 		if(destinationTextFile.exists()) {
 			if(! destinationTextFile.deleteIt()) {
@@ -25,15 +22,13 @@ class ShorterTextFileRules {
 			}
 		}
 		
-//		double size = appProperties.shorterTextFileSize.megaBytes();
-//		int comparing = destinationTextFile.size().compareTo(UPPER_LIMIT);
-		if(destinationTextFile.size().compareTo(UPPER_LIMIT) > 0) {
+		if(destinationTextFile.getSize().compareTo(UPPER_LIMIT) > 0) {
 			System.out.println("To big NewShorterTextFile size. Max value:"
-					+ UPPER_LIMIT + " Bytes. Requested size: " + destinationTextFile.size().bytes() + " Bytes");
+					+ UPPER_LIMIT + " Bytes. Requested size: " + destinationTextFile.getSize().bytes() + " Bytes");
 			return false;
-		}else if(destinationTextFile.size().compareTo(LOWER_LIMIT) < 0) {
+		}else if(destinationTextFile.getSize().compareTo(LOWER_LIMIT) < 0) {
 			System.out.println("To small NewShorterTextFile size. Min value: "
-					+ LOWER_LIMIT + " MB. Requested size: " + destinationTextFile.size().bytes() + " Bytes");
+					+ LOWER_LIMIT + " MB. Requested size: " + destinationTextFile.getSize().bytes() + " Bytes");
 			return false;
 		}
 	

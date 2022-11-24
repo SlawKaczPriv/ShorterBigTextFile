@@ -6,46 +6,17 @@ import java.nio.file.Path;
 /**
  * 
  */
-class DestinationFile {
-
-	private final Path path;
-	private final boolean exists;
-	private final FileSize size;
-	// Bytes
-	private final long sizeBytes;
-
+class DestinationFile extends File {
+	
 	/**
 	 * 
 	 * @param path
 	 * @param shorterTextFileSize
 	 */
-	DestinationFile(Path path, FileSize size) {
+	DestinationFile(Path path, FileSize fileSize) {
 		
-		this.path = path;
-		this.exists = exists(path);
-		this.size = size;
-		this.sizeBytes = size.bytes();
-	}
-
-	private boolean exists(Path path) {
-		
-		try {
-			if(Files.exists(path)) {
-				return true;
-			}else {
-				return false;}
-		}catch (SecurityException e) {
-			System.out.println("EXCEPTION from SourceFile Files.exists(): " + e.getMessage());
-			return false;
-		}
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	boolean exists() {
-		return exists;
+		super(path);
+		this.fileSize = fileSize;
 	}
 
 	/**
@@ -63,13 +34,5 @@ class DestinationFile {
 			System.out.println("EXCEPTION from Files.delete(): " + e.getMessage());
 			return false;
 		}
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	FileSize size() {
-		return size;
 	}
 }
