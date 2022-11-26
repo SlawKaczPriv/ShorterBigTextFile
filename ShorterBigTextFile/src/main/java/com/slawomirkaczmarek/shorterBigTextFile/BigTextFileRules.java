@@ -21,9 +21,9 @@ class BigTextFileRules {
 			return false;
 		}
 		
-		if(bigTextFile.getSize().compareTo(Bytes.ONE_MEGA_BYTE) <= 0) {
+		if(bigTextFile.getSize().compareTo(Byte.ONE_MEGA_BYTE) <= 0) {
 			System.out.println("BigTextFile size is to small. Min size have to be more than 1 MB (Bytes "
-					+ Bytes.ONE_MEGA_BYTE.value() + ")");
+					+ Byte.ONE_MEGA_BYTE.value() + ")");
 			return false;
 		}
 		

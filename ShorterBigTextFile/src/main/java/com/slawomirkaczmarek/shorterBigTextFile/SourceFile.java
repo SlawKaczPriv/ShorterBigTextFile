@@ -22,18 +22,18 @@ class SourceFile extends File {
 		this.fileSize = fileSize(path);
 	}
 
-	private FileSize fileSize(Path path) {
+	private Byte fileSize(Path path) {
 		
 		if(! this.exists) {
-			return new FileSize(new Bytes(0));
+			return new Byte(0);
 		}
 		
 		try {
 			long size = Files.size(path);
-			return new FileSize(new Bytes(size));
+			return new Byte(size);
 		}catch (Exception e) {
 			System.out.println("EXCEPTION from SourceFile Files.size(): " + e.getMessage());
-			return new FileSize(new Bytes(0));
+			return new Byte(0);
 		}
 	}
 

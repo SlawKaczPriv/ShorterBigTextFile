@@ -18,7 +18,7 @@ class ShorterBigTextFileRules_Test {
 		// Given
 		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT.value() + 1)};
 		Arguments appProps = new Arguments(args);
-		FileSize fileSize = new FileSize(appProps.megaBytes);
+		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		
@@ -29,9 +29,9 @@ class ShorterBigTextFileRules_Test {
 	@Test
 	void areSatisfied_test_newFileSizeMaxSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT.value() / Bytes.ONE_MEGA_BYTE.value())};
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT.value() / Byte.ONE_MEGA_BYTE.value())};
 		Arguments appProps = new Arguments(args);
-		FileSize fileSize = new FileSize(appProps.megaBytes);
+		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		assertTrue(ShorterTextFileRules.areSatisfied(destinationTextFile));
@@ -43,7 +43,7 @@ class ShorterBigTextFileRules_Test {
 		
 		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT.value() - 1)};
 		Arguments appProps = new Arguments(args);
-		FileSize fileSize = new FileSize(appProps.megaBytes);
+		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		assertFalse(ShorterTextFileRules.areSatisfied(destinationTextFile));
@@ -53,9 +53,9 @@ class ShorterBigTextFileRules_Test {
 	@Test
 	void areSatisfied_test_newFileSizeMinSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT.value() / Bytes.ONE_MEGA_BYTE.value())};
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT.value() / Byte.ONE_MEGA_BYTE.value())};
 		Arguments appProps = new Arguments(args);
-		FileSize fileSize = new FileSize(appProps.megaBytes);
+		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
 		
 		assertTrue(ShorterTextFileRules.areSatisfied(destinationTextFile));

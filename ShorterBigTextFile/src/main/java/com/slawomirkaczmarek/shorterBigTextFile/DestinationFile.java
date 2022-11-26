@@ -13,7 +13,7 @@ class DestinationFile extends File {
 	 * @param path
 	 * @param shorterTextFileSize
 	 */
-	DestinationFile(Path path, FileSize fileSize) {
+	DestinationFile(Path path, Byte fileSize) {
 		
 		super(path);
 		this.fileSize = fileSize;

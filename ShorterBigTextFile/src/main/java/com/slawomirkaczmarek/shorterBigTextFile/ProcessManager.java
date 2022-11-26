@@ -22,7 +22,7 @@ class ProcessManager {
 		
 		SourceFile bigTextFile;
 		DestinationFile destinationTextFile;
-		FileSize fileSize;
+		Byte fileSize;
 		
 		if(! arguments.isSuccessfullyInitialized()) {
 			System.out.println("Something went wrong. See log file. Application Exit.");
@@ -35,7 +35,7 @@ class ProcessManager {
 			return;
 		}
 		
-		fileSize = new FileSize(arguments.megaBytes);
+		fileSize = arguments.megaBytes.getBytes();
 		destinationTextFile = new DestinationFile(arguments.destinationFilePath, fileSize);
 		
 		if(! ShorterTextFileRules.areSatisfied(destinationTextFile)) {
@@ -48,6 +48,6 @@ class ProcessManager {
 		
 		// All checking rules passed.
 		// Running Main Functionality of application.
-		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.bytes().value());
+		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.value());
 	}
 }

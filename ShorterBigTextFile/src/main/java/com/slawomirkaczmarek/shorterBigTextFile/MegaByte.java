@@ -10,10 +10,10 @@ class MegaByte {
 	/** 0 */
 	public static final long MIN_VALUE = 0;
 	/** 8_796_093_022_207 [MB] Mega Bytes */
-	public static final long MAX_VALUE = Long.MAX_VALUE / Bytes.ONE_MEGA_BYTE.value();
+	public static final long MAX_VALUE = Long.MAX_VALUE / Byte.ONE_MEGA_BYTE.value();
 	
-	private final double megaByteValue;
-	private final Bytes byteValue;
+	private final double megaBytes;
+	private final Byte bytes;
 
 	/**
 	 * 
@@ -28,24 +28,24 @@ class MegaByte {
 		}else if(result > MAX_VALUE) {
 			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + MAX_VALUE);
 		}else {
-			this.megaByteValue = result;
-			this.byteValue = new Bytes(result * Bytes.ONE_MEGA_BYTE.value());
+			this.megaBytes = result;
+			this.bytes = new Byte(result * Byte.ONE_MEGA_BYTE.value());
 		}
 	}
 
 	
-	MegaByte(Bytes bytes) {
+	MegaByte(Byte bytes) {
 		
-		this.megaByteValue = (double) bytes.value() / Bytes.ONE_MEGA_BYTE.value();
-		this.byteValue = bytes;
+		this.megaBytes = (double) bytes.value() / Byte.ONE_MEGA_BYTE.value();
+		this.bytes = bytes;
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	Bytes getBytes() {
-		return byteValue;
+	Byte getBytes() {
+		return bytes;
 	}
 	
 	/**
@@ -53,13 +53,13 @@ class MegaByte {
 	 * @return
 	 */
 	double getValue() {
-		return megaByteValue;
+		return megaBytes;
 	}
 
 	@Override
 	public int hashCode() {
 		
-		return Objects.hash(byteValue);
+		return Objects.hash(bytes);
 	}
 
 	@Override
@@ -75,11 +75,11 @@ class MegaByte {
 			return false;
 		}
 		MegaByte other = (MegaByte) obj;
-		return this.byteValue.equals(other.byteValue);
+		return this.bytes.equals(other.bytes);
 	}
 
 	@Override
 	public String toString() {
-		return "MegaByte [megaByteValue=" + megaByteValue + ", byteValue=" + byteValue.value() + "]";
+		return "MegaByte [megaByteValue=" + megaBytes + ", byteValue=" + bytes.value() + "]";
 	}
 }

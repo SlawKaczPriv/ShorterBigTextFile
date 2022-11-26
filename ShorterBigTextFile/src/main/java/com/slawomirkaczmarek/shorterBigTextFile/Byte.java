@@ -5,10 +5,10 @@ import java.util.Objects;
 /**
  * 
  */
-class Bytes implements Comparable<Bytes>{
+class Byte implements Comparable<Byte>{
 	
 	/** 1_048_476 Bytes */
-	public static final Bytes ONE_MEGA_BYTE = new Bytes((int) Math.pow(2, 20));
+	public static final Byte ONE_MEGA_BYTE = new Byte((int) Math.pow(2, 20));
 
 	private final long value;
 
@@ -16,7 +16,7 @@ class Bytes implements Comparable<Bytes>{
 	 * 
 	 * @param value
 	 */
-	Bytes(long value) throws IllegalArgumentException{
+	Byte(long value) throws IllegalArgumentException{
 		
 		if(value < 0) {
 			throw new IllegalArgumentException("Value: " + value);
@@ -50,12 +50,12 @@ class Bytes implements Comparable<Bytes>{
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Bytes other = (Bytes) obj;
+		Byte other = (Byte) obj;
 		return value == other.value;
 	}
 
 	@Override
-	public int compareTo(Bytes other) {
+	public int compareTo(Byte other) {
 		
 		if(this.value < other.value) {
 			return -1;
