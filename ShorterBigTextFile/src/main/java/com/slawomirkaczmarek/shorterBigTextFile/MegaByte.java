@@ -10,7 +10,7 @@ class MegaByte {
 	/** 0 */
 	public static final long MIN_VALUE = 0;
 	/** 8_796_093_022_207 [MB] Mega Bytes */
-	public static final long MAX_VALUE = Long.MAX_VALUE / Byte.ONE_MEGA_BYTE.value();
+	public static final long MAX_VALUE = Long.MAX_VALUE / Byte.ONE_MEGA_BYTE.longVal();
 	
 	private final double megaBytes;
 	private final Byte bytes;
@@ -29,14 +29,14 @@ class MegaByte {
 			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + MAX_VALUE);
 		}else {
 			this.megaBytes = result;
-			this.bytes = new Byte(result * Byte.ONE_MEGA_BYTE.value());
+			this.bytes = new Byte(result * Byte.ONE_MEGA_BYTE.longVal());
 		}
 	}
 
 	
 	MegaByte(Byte bytes) {
 		
-		this.megaBytes = (double) bytes.value() / Byte.ONE_MEGA_BYTE.value();
+		this.megaBytes = (double) bytes.longVal() / Byte.ONE_MEGA_BYTE.longVal();
 		this.bytes = bytes;
 	}
 
@@ -80,6 +80,6 @@ class MegaByte {
 
 	@Override
 	public String toString() {
-		return "MegaByte [megaByteValue=" + megaBytes + ", byteValue=" + bytes.value() + "]";
+		return "MegaByte [megaByteValue=" + megaBytes + ", byteValue=" + bytes.longVal() + "]";
 	}
 }

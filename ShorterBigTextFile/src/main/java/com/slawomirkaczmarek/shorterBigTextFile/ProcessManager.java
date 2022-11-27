@@ -48,6 +48,6 @@ class ProcessManager {
 		
 		// All checking rules passed.
 		// Running Main Functionality of application.
-		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.value());
+		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.longVal());
 	}
 }

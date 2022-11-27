@@ -29,7 +29,7 @@ class ByteTest {
 		
 		Byte byte1 = new Byte(0);
 		
-		assertEquals(0, byte1.value());
+		assertEquals(0, byte1.longVal());
 	}
 
 	@Test

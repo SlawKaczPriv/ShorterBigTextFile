@@ -44,10 +44,10 @@ class MegaByte_Test {
 	void getBytes_test_maxValue() throws Exception {
 		
 		// Given
-		long expected = MegaByte.MAX_VALUE * Byte.ONE_MEGA_BYTE.value();
+		long expected = MegaByte.MAX_VALUE * Byte.ONE_MEGA_BYTE.longVal();
 		
 		// When
-		long actual = new MegaByte(String.valueOf(MegaByte.MAX_VALUE)).getBytes().value();
+		long actual = new MegaByte(String.valueOf(MegaByte.MAX_VALUE)).getBytes().longVal();
 		
 		// Then
 		assertEquals(expected, actual);
@@ -57,10 +57,10 @@ class MegaByte_Test {
 	void getBytes_test_minValue() throws Exception {
 		
 		// Given
-		long expected = MegaByte.MIN_VALUE * Byte.ONE_MEGA_BYTE.value();
+		long expected = MegaByte.MIN_VALUE * Byte.ONE_MEGA_BYTE.longVal();
 		
 		// When
-		long actual = new MegaByte(String.valueOf(MegaByte.MIN_VALUE)).getBytes().value();
+		long actual = new MegaByte(String.valueOf(MegaByte.MIN_VALUE)).getBytes().longVal();
 		
 		// Then
 		assertEquals(expected, actual);
@@ -69,7 +69,7 @@ class MegaByte_Test {
 	@Test
 	void getBytes_test_value_1() throws Exception {
 		
-		assertEquals(new Byte(Byte.ONE_MEGA_BYTE.value()), new MegaByte("1").getBytes());
+		assertEquals(new Byte(Byte.ONE_MEGA_BYTE.longVal()), new MegaByte("1").getBytes());
 	}
 	
 	@Test

@@ -53,6 +53,6 @@ abstract class File {
 
 	@Override
 	public String toString() {
-		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + fileSize.value() + " bytes]";
+		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + fileSize.longVal() + " bytes]";
 	}
 }

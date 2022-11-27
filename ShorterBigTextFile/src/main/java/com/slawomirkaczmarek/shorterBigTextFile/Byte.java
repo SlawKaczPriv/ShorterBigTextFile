@@ -19,7 +19,7 @@ class Byte implements Comparable<Byte>{
 	Byte(long value) throws IllegalArgumentException{
 		
 		if(value < 0) {
-			throw new IllegalArgumentException("Value: " + value);
+			throw new IllegalArgumentException("long value: " + value);
 		}else {
 			this.value = value;
 		}
@@ -29,7 +29,7 @@ class Byte implements Comparable<Byte>{
 	 * 
 	 * @return
 	 */
-	long value() {
+	long longVal() {
 		return value;
 	}
 
