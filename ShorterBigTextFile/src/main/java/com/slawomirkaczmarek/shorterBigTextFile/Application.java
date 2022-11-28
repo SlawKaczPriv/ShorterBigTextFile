@@ -1,8 +1,19 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class Application {
+	
+	private static final String DEFAULT_SIZE = "1";
 
 	public static void main(String[] args) {
+		
+		Properties properties = loadProperties("ShortTextFile.properties");
+		System.out.println(properties.getProperty("destinationFile.defaultSize", DEFAULT_SIZE));
 		
 		int argsAmount = args.length;
 		
@@ -12,14 +23,25 @@ public class Application {
 				new ProcessManager(args).run(); // Running application.
 //				System.out.println("ShortTextFile app END.");
 			}else {
-				System.out.println("Argument size of destination file is not integer number.");
+				System.out.println("Argument: size of destination file must be integer number.");
 				printHelp();
 			}
 			
 		}else if(argsAmount == 2) {
 			
-			new ProcessManager(args).run(); // Running application.
-//			System.out.println("ShortTextFile app END.");
+			String[] arguments = new String[] {
+					args[0],
+					args[1],
+					properties.getProperty("destinationFile.defaultSize", DEFAULT_SIZE)
+				};
+			
+			if(isIntegerNumber(arguments[2])) {
+				new ProcessManager(arguments).run(); // Running application.
+//				System.out.println("ShortTextFile app END.");
+			}else {
+				System.out.println("Argument: size of destination file must be integer number.");
+				printHelp();
+			}
 			
 		}else if(argsAmount == 1) {
 			
@@ -42,6 +64,45 @@ public class Application {
 //		System.out.println("ShortTextFile app END.");
 //		System.exit(0);
 		return;
+	}
+
+	private static Properties properties() {
+		
+		try (InputStream input = Application.class.getClassLoader().getResourceAsStream("ShortTextFile.properties")) {
+
+            Properties prop = new Properties();
+
+            if (input == null) {
+                System.out.println("Sorry, unable to find ShortTextFile.properties");
+                return new Properties();
+            }
+
+            prop.load(input);
+            return prop;
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return new Properties();
+        }
+	}
+	
+	public static Properties loadProperties(String filePath) {
+		
+		Properties properties = new Properties();
+		
+		try(FileInputStream fileInputStream = new FileInputStream(filePath)) {
+			properties.load(fileInputStream);
+		} catch (FileNotFoundException e) {
+			System.out.println("ERROR. Properties file not found.");
+//			logger.error(e.getMessage());
+			//e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("ERROR input Properties.");
+//			logger.error(e.getMessage());
+			//e.printStackTrace();
+		}
+		
+		return properties;
 	}
 
 	private static boolean isIntegerNumber(String arg) {
