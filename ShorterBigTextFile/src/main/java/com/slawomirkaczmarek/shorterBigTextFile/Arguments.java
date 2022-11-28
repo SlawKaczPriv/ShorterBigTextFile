@@ -20,19 +20,23 @@ class Arguments {
 	 * 
 	 * @param args
 	 */
-	Arguments(String[] args) {
+	Arguments(String[] args) throws IllegalArgumentException {
+		
+		if(args.length != 3) {
+			throw new IllegalArgumentException();
+		}
 		
 		this.successfullyInitialized = true;
 		
-		this.sourceFilePath = bigTextFilePath(args);
-		this.destinationFilePath = shorterTextFilePath(args);
-		this.megaBytes = megaBytes(args);
+		this.sourceFilePath = bigTextFilePath(args[0]);
+		this.destinationFilePath = shorterTextFilePath(args[1]);
+		this.megaBytes = megaBytes(args[2]);
 	}
 
-	private Path bigTextFilePath(String[] args) {
+	private Path bigTextFilePath(String path) {
 		
 		try {
-			return Paths.get(args[0]);
+			return Paths.get(path);
 		}catch (Exception e) {
 			System.out.println("ERROR bigTextFilePath. Message: "
 					+ e.getMessage());
@@ -41,10 +45,10 @@ class Arguments {
 		}
 	}
 
-	private Path shorterTextFilePath(String[] args) {
+	private Path shorterTextFilePath(String path) {
 		
 		try {
-			return Paths.get(args[1]);
+			return Paths.get(path);
 		}catch (Exception e) {
 			System.out.println("ERROR shorterTextFilePath. Message: "
 					+ e.getMessage());
@@ -53,17 +57,17 @@ class Arguments {
 		}
 	}
 
-	private MegaByte megaBytes(String[] args) {
-		
-		if(args.length == 3) {
-			return megaBytes(args[2]);
-		}else {
-			System.out.println("Argument DestinationTextFileSize is set as default: "
-					+ DEFAULT_SIZE
-					+ " MB.");
-			return megaBytes(DEFAULT_SIZE);
-		}
-	}
+//	private MegaByte megaBytes(String size) {
+//		
+//		if(args.length == 3) {
+//			return megaBytes(args[2]);
+//		}else {
+//			System.out.println("Argument DestinationTextFileSize is set as default: "
+//					+ DEFAULT_SIZE
+//					+ " MB.");
+//			return megaBytes(DEFAULT_SIZE);
+//		}
+//	}
 
 	private MegaByte megaBytes(String size) {
 		

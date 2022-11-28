@@ -3,7 +3,6 @@ package com.slawomirkaczmarek.shorterBigTextFile;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class Application {
@@ -64,26 +63,6 @@ public class Application {
 //		System.out.println("ShortTextFile app END.");
 //		System.exit(0);
 		return;
-	}
-
-	private static Properties properties() {
-		
-		try (InputStream input = Application.class.getClassLoader().getResourceAsStream("ShortTextFile.properties")) {
-
-            Properties prop = new Properties();
-
-            if (input == null) {
-                System.out.println("Sorry, unable to find ShortTextFile.properties");
-                return new Properties();
-            }
-
-            prop.load(input);
-            return prop;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return new Properties();
-        }
 	}
 	
 	public static Properties loadProperties(String filePath) {
