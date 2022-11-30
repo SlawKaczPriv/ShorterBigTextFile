@@ -1,5 +1,6 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -10,30 +11,51 @@ class MegaByte {
 	/** 0 */
 	public static final long MIN_VALUE = 0;
 	/** 8_796_093_022_207 [MB] Mega Bytes */
-	public static final long MAX_VALUE = Long.MAX_VALUE / Byte.ONE_MEGA_BYTE.longVal();
+	public static final double MAX_VALUE = (double) Long.MAX_VALUE / Byte.ONE_MEGA_BYTE.longVal();
+	
+	/** 1_048_476 Bytes */
+	private static final BigDecimal ONE_MEGA_BYTES = new BigDecimal(Byte.ONE_MEGA_BYTE.longVal());
 	
 	private final double megaBytes;
 	private final Byte bytes;
 
 	/**
 	 * 
-	 * @param string
+	 * @param value
+	 * @throws NumberFormatException
+	 * @throws IllegalArgumentException
 	 */
-	MegaByte(String string) throws NumberFormatException, IllegalArgumentException{
+	MegaByte(String value) throws NumberFormatException, IllegalArgumentException {
 		
-		long result = Long.parseLong(string); // Can throw NumberFormatException
+		BigDecimal result = new BigDecimal(value);
+		if(result.compareTo(BigDecimal.ZERO) < 0) {
+			throw new IllegalArgumentException("String value: " + value);
+		}else if(result.compareTo(new BigDecimal(MAX_VALUE)) > 0) {
+			throw new IllegalArgumentException("String value: " + value);
+		}
 		
-		if(result < MIN_VALUE) {
-			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + MAX_VALUE);
-		}else if(result > MAX_VALUE) {
-			throw new IllegalArgumentException("MegaByte argument value have to be between 0 and " + MAX_VALUE);
+		if(allowedNuberOfDecimalPlacesForMegaByte(result.doubleValue())) {
+			this.megaBytes = result.doubleValue();
+			this.bytes = new Byte((int) (result.doubleValue() * Byte.ONE_MEGA_BYTE.longVal()));
 		}else {
-			this.megaBytes = result;
-			this.bytes = new Byte(result * Byte.ONE_MEGA_BYTE.longVal());
+			throw new IllegalArgumentException("not allowedNuberOfDecimalPlacesForMegaByte, String value: " + value);
 		}
 	}
 
-	
+	private boolean allowedNuberOfDecimalPlacesForMegaByte(double megaByte) {
+		return allowedNuberOfDecimalPlaces(megaByte, 1_000_000);
+	}
+
+	private boolean allowedNuberOfDecimalPlaces(double testedNumber, int maxDecimalPlaces) {
+		
+		testedNumber = testedNumber * maxDecimalPlaces;
+		return testedNumber == (int) testedNumber;
+	}
+
+	/**
+	 * 
+	 * @param bytes
+	 */
 	MegaByte(Byte bytes) {
 		
 		this.megaBytes = (double) bytes.longVal() / Byte.ONE_MEGA_BYTE.longVal();

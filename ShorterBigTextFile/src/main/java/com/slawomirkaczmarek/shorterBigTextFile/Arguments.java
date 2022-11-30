@@ -8,8 +8,6 @@ import java.nio.file.Paths;
  */
 class Arguments {
 	
-	public static final String DEFAULT_SIZE = "1";
-	
 	private boolean successfullyInitialized;
 
 	final Path sourceFilePath;
@@ -23,17 +21,17 @@ class Arguments {
 	Arguments(String[] args) throws IllegalArgumentException {
 		
 		if(args.length != 3) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("args values: " + args);
 		}
 		
 		this.successfullyInitialized = true;
 		
-		this.sourceFilePath = bigTextFilePath(args[0]);
-		this.destinationFilePath = shorterTextFilePath(args[1]);
+		this.sourceFilePath = sourceFilePath(args[0]);
+		this.destinationFilePath = destinationFilePath(args[1]);
 		this.megaBytes = megaBytes(args[2]);
 	}
 
-	private Path bigTextFilePath(String path) {
+	private Path sourceFilePath(String path) {
 		
 		try {
 			return Paths.get(path);
@@ -45,7 +43,7 @@ class Arguments {
 		}
 	}
 
-	private Path shorterTextFilePath(String path) {
+	private Path destinationFilePath(String path) {
 		
 		try {
 			return Paths.get(path);
@@ -56,18 +54,6 @@ class Arguments {
 			return Paths.get("");
 		}
 	}
-
-//	private MegaByte megaBytes(String size) {
-//		
-//		if(args.length == 3) {
-//			return megaBytes(args[2]);
-//		}else {
-//			System.out.println("Argument DestinationTextFileSize is set as default: "
-//					+ DEFAULT_SIZE
-//					+ " MB.");
-//			return megaBytes(DEFAULT_SIZE);
-//		}
-//	}
 
 	private MegaByte megaBytes(String size) {
 		
