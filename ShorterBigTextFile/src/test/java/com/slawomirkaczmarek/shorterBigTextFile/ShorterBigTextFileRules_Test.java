@@ -29,7 +29,7 @@ class ShorterBigTextFileRules_Test {
 	@Test
 	void areSatisfied_test_newFileSizeMaxSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT.longVal() / Byte.ONE_MEGA_BYTE.longVal())};
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.UPPER_LIMIT.longVal() / Byte.ONE_MEGA_BYTES.longVal())};
 		Arguments appProps = new Arguments(args);
 		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);
@@ -53,7 +53,7 @@ class ShorterBigTextFileRules_Test {
 	@Test
 	void areSatisfied_test_newFileSizeMinSize() throws Exception {
 		
-		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT.longVal() / Byte.ONE_MEGA_BYTE.longVal())};
+		String[] args = new String[] {"source", "dest", String.valueOf(ShorterTextFileRules.LOWER_LIMIT.longVal() / Byte.ONE_MEGA_BYTES.longVal())};
 		Arguments appProps = new Arguments(args);
 		Byte fileSize = appProps.megaBytes.getBytes();
 		DestinationFile destinationTextFile = new DestinationFile(appProps.destinationFilePath, fileSize);

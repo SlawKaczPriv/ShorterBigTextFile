@@ -8,7 +8,7 @@ class ShorterTextFileRules {
 //	/** 2047 [MB] Mega Bytes */
 	static final Byte UPPER_LIMIT = new Byte(Integer.MAX_VALUE);
 //	/** 1 [MB] Mega Bytes */
-	static final Byte LOWER_LIMIT = Byte.ONE_MEGA_BYTE;
+	static final Byte LOWER_LIMIT = Byte.ONE_MEGA_BYTES;
 	
 	// Public or default constructor is not needed.
 	// Prevents instantiation.
