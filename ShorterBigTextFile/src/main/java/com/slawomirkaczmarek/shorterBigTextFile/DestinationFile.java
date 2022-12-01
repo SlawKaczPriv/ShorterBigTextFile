@@ -13,10 +13,10 @@ class DestinationFile extends File {
 	 * @param path
 	 * @param shorterTextFileSize
 	 */
-	DestinationFile(Path path, Byte fileSize) {
+	DestinationFile(Path path, Byte size) {
 		
 		super(path);
-		this.fileSize = fileSize;
+		this.size = size;
 	}
 
 	/**
@@ -24,11 +24,11 @@ class DestinationFile extends File {
 	 * @return true if success otherwise false
 	 * @throws Exception
 	 */
-	boolean deleteIt() {
+	boolean delete() {
 		
 		try {
 			Files.delete(path);
-			System.out.println("Deleted ShorterTextFile: " + path);
+			// System.out.println("INFO. Deleted ShorterTextFile: " + path);
 			return true;
 		}catch (Exception e) {
 			System.out.println("EXCEPTION from Files.delete(): " + e.getMessage());

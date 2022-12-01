@@ -10,7 +10,7 @@ abstract class File {
 
 	final Path path;
 	final boolean exists;
-	Byte fileSize;
+	Byte size;
 	
 	/**
 	 * 
@@ -48,11 +48,11 @@ abstract class File {
 	 * @return
 	 */
 	Byte getSize() {
-		return fileSize;
+		return size;
 	}
 
 	@Override
 	public String toString() {
-		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + fileSize.longVal() + " bytes]";
+		return "SourceFile [path=" + path + ", exists=" + exists + ", size=" + size.longVal() + " bytes]";
 	}
 }

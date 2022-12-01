@@ -2,6 +2,7 @@ package com.slawomirkaczmarek.shorterBigTextFile;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -19,7 +20,7 @@ class SourceFile extends File {
 	SourceFile(Path path) {
 		
 		super(path);
-		this.fileSize = fileSize(path);
+		this.size = fileSize(path);
 	}
 
 	private Byte fileSize(Path path) {
@@ -37,31 +38,41 @@ class SourceFile extends File {
 		}
 	}
 
+//	/**
+//	 * MAIN FUNCTIONALITY of application.
+//	 * 
+//	 * @param destinationFilePath
+//	 * @param destinationFileSize more or equal zero
+//	 * 
+//	 * @return true if success otherwise false.
+//	 * @throws IOException 
+//	 */
 	/**
 	 * MAIN FUNCTIONALITY of application.
 	 * 
 	 * @param destinationFilePath
 	 * @param destinationFileSize
 	 * 
-	 * @return true if success otherwise false.
+	 * @throws IllegalArgumentException
+	 * @throws IOException
 	 */
-	public boolean shortenTo(Path destinationFilePath, long destinationFileSize) {
+	public void shortenTo(Path destinationFilePath, int destinationFileSize) throws IllegalArgumentException, IOException {
 		
-		int newShorterTextFileSize = (int) destinationFileSize;
+		if(destinationFileSize < 0) {
+			throw new IllegalArgumentException("int value: " + destinationFileSize);
+		}
 		
 		try(FileChannel fChan = (FileChannel) Files.newByteChannel(this.path);
 				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(destinationFilePath.toString()))){
 			
 			MappedByteBuffer mBuf = fChan.map(FileChannel.MapMode.READ_ONLY, 0, fChan.size());
 			byte character;
-			for(int i = mBuf.limit() - newShorterTextFileSize; i < mBuf.limit(); i++) {
+			for(int i = mBuf.limit() - destinationFileSize; i < mBuf.limit(); i++) {
 				character = mBuf.get(i);
 				bufferdWriter.write(character);
 			}
-			return true;
-		}catch (Exception e) {
-			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());
-			return false;
-		}
+		}//catch (Exception e) {
+//			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());
+//		}
 	}
 }

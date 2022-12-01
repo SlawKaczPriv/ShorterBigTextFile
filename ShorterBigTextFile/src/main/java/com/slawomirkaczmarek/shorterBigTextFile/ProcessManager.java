@@ -1,5 +1,7 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
+import java.io.IOException;
+
 /**
  * 
  */
@@ -21,11 +23,10 @@ class ProcessManager {
 	void run() {
 		
 		SourceFile bigTextFile;
-		DestinationFile destinationTextFile;
-		Byte fileSize;
+		DestinationFile shorterTextFile;
+		int shorterTextFileSize;
 		
 		if(! arguments.isSuccessfullyInitialized()) {
-			System.out.println("Something went wrong. See log file. Application Exit.");
 			return;
 		}
 		
@@ -35,19 +36,27 @@ class ProcessManager {
 			return;
 		}
 		
-		fileSize = arguments.megaBytes.getBytes();
-		destinationTextFile = new DestinationFile(arguments.destinationFilePath, fileSize);
+		Byte destFileSize = arguments.megaBytes.getBytes();
+		shorterTextFile = new DestinationFile(arguments.destinationFilePath, destFileSize);
 		
-		if(! ShorterTextFileRules.areSatisfied(destinationTextFile)) {
+		if(! ShorterTextFileRules.areSatisfied(shorterTextFile)) {
 			return;
+		}else {
+			shorterTextFileSize = (int) destFileSize.longVal();
 		}
 		
-		if(! ApplicationRules.areSatisfied(bigTextFile, destinationTextFile)) {
+		if(! ApplicationRules.areSatisfied(bigTextFile, shorterTextFile)) {
 			return;
 		}
 		
 		// All checking rules passed.
+		
 		// Running Main Functionality of application.
-		bigTextFile.shortenTo(arguments.destinationFilePath, fileSize.longVal());
+		try {
+			bigTextFile.shortenTo(arguments.destinationFilePath, shorterTextFileSize);
+		} catch (IllegalArgumentException | IOException e) {
+			System.out.println("EXCEPTION form SourceFile.shortenTo " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

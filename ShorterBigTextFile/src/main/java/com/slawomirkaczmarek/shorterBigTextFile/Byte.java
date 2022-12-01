@@ -7,10 +7,12 @@ import java.util.Objects;
  */
 class Byte implements Comparable<Byte>{
 	
+	/** 0 */
+	public static final Byte MIN_VALUE = new Byte(0);
+	/**  */
+	public static final Byte MAX_VALUE = new Byte(Long.MAX_VALUE);
 	/** 1_048_476 Bytes */
 	public static final Byte ONE_MEGA_BYTES = new Byte((int) Math.pow(2, 20));
-
-	public static final Byte MAX_VALUE = new Byte(Long.MAX_VALUE);
 
 	private final long value;
 

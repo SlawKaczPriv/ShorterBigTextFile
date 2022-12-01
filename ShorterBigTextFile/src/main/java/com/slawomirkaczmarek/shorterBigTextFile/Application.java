@@ -1,62 +1,37 @@
 package com.slawomirkaczmarek.shorterBigTextFile;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * 
+ */
 public class Application {
 	
-	private static final String DEFAULT_SIZE = "1";
+	private static final String PROPERTY_FILE_PATH = "ShortTextFile.properties";
+	/** Unit [MB] MegaBytes */
+	private static final String DESTINATION_FILE_DEFAULT_SIZE = "1";
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
-		Properties properties = loadProperties("ShortTextFile.properties");
-		System.out.println(properties.getProperty("destinationFile.defaultSize", DEFAULT_SIZE));
+		Properties properties = JavaUtils.loadProperties(PROPERTY_FILE_PATH);
 		
 		int argsAmount = args.length;
 		
 		if(argsAmount == 3) {
-			
-			if(isIntegerNumber(args[2])) {
-				new ProcessManager(args).run(); // Running application.
-//				System.out.println("ShortTextFile app END.");
-			}else {
-				System.out.println("Argument: size of destination file must be integer number.");
-				printHelp();
-			}
-			
+			runAppForThreeArgs(args);
 		}else if(argsAmount == 2) {
-			
-			String[] arguments = new String[] {
-					args[0],
-					args[1],
-					properties.getProperty("destinationFile.defaultSize", DEFAULT_SIZE)
-				};
-			
-			if(isIntegerNumber(arguments[2])) {
-				new ProcessManager(arguments).run(); // Running application.
-//				System.out.println("ShortTextFile app END.");
-			}else {
-				System.out.println("Argument: size of destination file must be integer number.");
-				printHelp();
-			}
-			
+			runAppForTwoArgs(args, properties);
 		}else if(argsAmount == 1) {
-			
-			if(args[0].equalsIgnoreCase("-help")) {
-				printHelp();
-			}else {
-				System.out.println("No variable: path of destination file.");
-				printHelp();
-			}
+			runAppForOneArg(args);
 		}else if(argsAmount == 0) {
-			
-			System.out.println("No variables: path of source file, path of destination file and optionally size of destination file.");
+			System.out.println("ERROR. No variables.");
 			printHelp();
 		}else {
-			
-			System.out.println("To many variables");
+			System.out.println("ERROR. To many variables");
 			printHelp();
 		}
 //		
@@ -64,24 +39,16 @@ public class Application {
 //		System.exit(0);
 		return;
 	}
-	
-	public static Properties loadProperties(String filePath) {
+
+	private static void runAppForThreeArgs(String[] args) {
 		
-		Properties properties = new Properties();
-		
-		try(FileInputStream fileInputStream = new FileInputStream(filePath)) {
-			properties.load(fileInputStream);
-		} catch (FileNotFoundException e) {
-			System.out.println("ERROR. Properties file not found.");
-//			logger.error(e.getMessage());
-			//e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("ERROR input Properties.");
-//			logger.error(e.getMessage());
-			//e.printStackTrace();
+		if(isIntegerNumber(args[2])) {
+			new ProcessManager(args).run(); // Running application.
+//				System.out.println("ShortTextFile app END.");
+		}else {
+			System.out.println("ERROR. Argument size of destination file must be integer number.");
+			printHelp();
 		}
-		
-		return properties;
 	}
 
 	private static boolean isIntegerNumber(String arg) {
@@ -105,5 +72,27 @@ public class Application {
 				+ System.lineSeparator() + "\t" + "java -jar shorterBigTextFile-" + version + ".jar c:\\sourceBigTxtFile.txt c:\\destination.txt 2"
 				+ System.lineSeparator() + "\t" + "For Windows system if not set JAVA_HOME:"
 				+ System.lineSeparator() + "\t" + "C:\\\"Program Files\"\\Java\\jdk-15.0.2\\bin\\java.exe -jar shorterBigTextFile-" + version + ".jar c:\\sourceBigTxtFile.txt c:\\destination.txt 2");
+	}
+
+	private static void runAppForTwoArgs(String[] args, Properties properties) {
+		
+		String[] arguments = new String[] {
+				args[0],
+				args[1],
+				properties.getProperty("destinationFile.defaultSize", DESTINATION_FILE_DEFAULT_SIZE)
+			};
+		// System.out.println("INFO. Destination file size is set to: " + arguments[2] + " [MB] MegaBytes.");
+		
+		runAppForThreeArgs(arguments);
+	}
+
+	private static void runAppForOneArg(String[] args) {
+		
+		if(args[0].equalsIgnoreCase("-help")) {
+			printHelp();
+		}else {
+			System.out.println("ERROR. No argument: path of destination file.");
+			printHelp();
+		}
 	}
 }

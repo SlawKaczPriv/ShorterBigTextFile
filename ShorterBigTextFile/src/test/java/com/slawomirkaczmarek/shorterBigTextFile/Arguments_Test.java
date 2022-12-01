@@ -2,6 +2,7 @@ package com.slawomirkaczmarek.shorterBigTextFile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -94,10 +95,10 @@ class Arguments_Test {
 		Arguments appProp = new Arguments(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("0");
+		MegaByte megaBytes = new MegaByte("2.9");
 		
 		// Then
-		assertFalse(appProp.isSuccessfullyInitialized());
+		assertTrue(appProp.isSuccessfullyInitialized());
 		assertEquals(source, appProp.sourceFilePath);
 		assertEquals(dest, appProp.destinationFilePath);
 		assertEquals(megaBytes, appProp.megaBytes);
@@ -108,7 +109,7 @@ class Arguments_Test {
 	final void test_destinationFileSizeToBig() {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE + 1)};
+		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE.getValue().add(new BigDecimal(1)))};
 		Arguments appProp = new Arguments(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
@@ -126,7 +127,7 @@ class Arguments_Test {
 	final void test_destinationFileSizeToSmall() {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE - 1)};
+		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE.getValue().subtract(new BigDecimal(1)))};
 		Arguments appProp = new Arguments(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
@@ -144,11 +145,11 @@ class Arguments_Test {
 	final void test_destinationFileSizeMaxValue() {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE)};
+		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE.getValue())};
 		Arguments appProp = new Arguments(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte(String.valueOf(MegaByte.MAX_VALUE));
+		MegaByte megaBytes = new MegaByte(String.valueOf(MegaByte.MAX_VALUE.getValue()));
 		
 		// Then
 		assertTrue(appProp.isSuccessfullyInitialized());
@@ -162,7 +163,7 @@ class Arguments_Test {
 	final void test_destinationFileSizeMinValue() {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE)};
+		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE.getValue())};
 		Arguments appProp = new Arguments(args);
 		Path source = Paths.get("source");
 		Path dest = Paths.get("dest");

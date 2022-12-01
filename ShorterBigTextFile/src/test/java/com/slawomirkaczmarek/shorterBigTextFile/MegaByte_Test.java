@@ -25,7 +25,7 @@ class MegaByte_Test {
 	@Test
 	void megaByte_test_IllegalArgumentException_lessThanMinValue() throws Exception {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new MegaByte(String.valueOf(MegaByte.MIN_VALUE - 1));
+			new MegaByte(String.valueOf(MegaByte.MIN_VALUE.getValue().subtract(new BigDecimal(1))));
 		});
 	}
 
@@ -33,7 +33,7 @@ class MegaByte_Test {
 	void megaByte_test_IllegalArgumentException_moreThanMaxValue() throws Exception {
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			new MegaByte(String.valueOf(MegaByte.MAX_VALUE + 1));
+			new MegaByte(String.valueOf(MegaByte.MAX_VALUE.getValue().add(new BigDecimal(1))));
 		});
 	}
 
@@ -47,10 +47,10 @@ class MegaByte_Test {
 	void getBytes_test_maxValue() throws Exception {
 		
 		// Given
-		long expected = (long) (MegaByte.MAX_VALUE * Byte.ONE_MEGA_BYTES.longVal());
-		
+		Byte expected = Byte.MAX_VALUE;
+				
 		// When
-		long actual = new MegaByte(String.valueOf(MegaByte.MAX_VALUE)).getBytes().longVal();
+		Byte actual = MegaByte.MAX_VALUE.getBytes(); 
 		
 		// Then
 		assertEquals(expected, actual);
@@ -60,10 +60,10 @@ class MegaByte_Test {
 	void getBytes_test_minValue() throws Exception {
 		
 		// Given
-		long expected = MegaByte.MIN_VALUE * Byte.ONE_MEGA_BYTES.longVal();
+		Byte expected = Byte.MIN_VALUE;
 		
 		// When
-		long actual = new MegaByte(String.valueOf(MegaByte.MIN_VALUE)).getBytes().longVal();
+		Byte actual = MegaByte.MIN_VALUE.getBytes(); 
 		
 		// Then
 		assertEquals(expected, actual);
@@ -89,6 +89,12 @@ class MegaByte_Test {
 	@Test
 	void test() {
 		
+		System.out.println("max int=" + Integer.MAX_VALUE);
+		
+		Byte bytes = new Byte(1234);
+		MegaByte test = new MegaByte(bytes);
+		System.out.println(test);
+		
 		System.out.println("ONE_MEGA_BYTES=" + (int) Math.pow(2, 20));
 		System.out.println("ONE_MEGA_BYTES=" + Math.pow(2, 20));
 		
@@ -110,6 +116,7 @@ class MegaByte_Test {
 		
 		BigDecimal resultMaxB = resultMaxMB.multiply(oneMegaByte);
 		System.out.println("result maxByte=" + resultMaxB);
+		
 		
 		return ((long) ((Long.MAX_VALUE / Byte.ONE_MEGA_BYTES.longVal()) * 1_000_000)) / (double) 1_000_000;
 	}
