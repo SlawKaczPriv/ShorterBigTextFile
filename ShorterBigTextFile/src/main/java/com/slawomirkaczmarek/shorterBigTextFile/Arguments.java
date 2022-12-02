@@ -60,14 +60,14 @@ class Arguments {
 		try {
 			return new MegaByte(size);
 		}catch (NumberFormatException e) {
-			System.out.println("ERROR. Argument DestinationTextFileSize is not valid. Message: "
+			System.out.println("ERROR NumberFormatException. Argument DestinationTextFileSize is not valid. Message: "
 					+ e.getMessage());
 //			logger.error("Argument DestinationTextFileSize is not valid. Message: "
 //					+ e.getMessage());
 			this.successfullyInitialized = false;
 			return new MegaByte("0");
 		}catch (IllegalArgumentException e) {
-			System.out.println("ERROR. Argument DestinationTextFileSize is not valid. Message: "
+			System.out.println("ERROR IllegalArgumentException. Argument DestinationTextFileSize is not valid. Message: "
 					+ e.getMessage());
 //			logger.error("Argument DestinationTextFileSize is not valid. Message: "
 //					+ e.getMessage());

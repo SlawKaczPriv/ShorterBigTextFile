@@ -59,17 +59,24 @@ class SourceFile extends File {
 	public void shortenTo(Path destinationFilePath, int destinationFileSize) throws IllegalArgumentException, IOException {
 		
 		if(destinationFileSize < 0) {
-			throw new IllegalArgumentException("int value: " + destinationFileSize);
+			throw new IllegalArgumentException("destinationFileSize value: " + destinationFileSize);
 		}
 		
-		try(FileChannel fChan = (FileChannel) Files.newByteChannel(this.path);
-				BufferedWriter bufferdWriter = new BufferedWriter(new FileWriter(destinationFilePath.toString()))){
+		try(FileChannel sourceFileFCh = (FileChannel) Files.newByteChannel(this.path);
+				BufferedWriter destinationFile = new BufferedWriter(new FileWriter(destinationFilePath.toString()))){
 			
-			MappedByteBuffer mBuf = fChan.map(FileChannel.MapMode.READ_ONLY, 0, fChan.size());
+			MappedByteBuffer sourceFileMBuf = sourceFileFCh.map(FileChannel.MapMode.READ_ONLY, 0, sourceFileFCh.size());
+			int sourceFileMBufLlimit = sourceFileMBuf.limit();
+			
+			if(destinationFileSize >= sourceFileMBufLlimit) {
+				throw new IllegalArgumentException("destinationFileSize value: " + destinationFileSize
+						+ ", sourceFileMappedByteBuffer.limit: " + sourceFileMBufLlimit);
+			}
+			
 			byte character;
-			for(int i = mBuf.limit() - destinationFileSize; i < mBuf.limit(); i++) {
-				character = mBuf.get(i);
-				bufferdWriter.write(character);
+			for(int i = sourceFileMBufLlimit - destinationFileSize; i < sourceFileMBuf.limit(); i++) {
+				character = sourceFileMBuf.get(i);
+				destinationFile.write(character);
 			}
 		}//catch (Exception e) {
 //			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());

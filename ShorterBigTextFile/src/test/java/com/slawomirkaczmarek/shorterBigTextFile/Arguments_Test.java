@@ -6,173 +6,138 @@ import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class Arguments_Test {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@Disabled
 	@Test
-	final void test_onlyOneArgument() {
-
-		// Given
-		String[] args = new String[] {"source"};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("");
-//		MegaByte megaBytes = new MegaByte(Arguments.DEFAULT_SIZE);
-		
-		// Then
-		assertFalse(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-//		assertEquals(megaBytes, appProp.megaBytes);
-	}
-
-	@Disabled
-	@Test
-	final void test_noArguments() throws Exception{
+	void Arguments_test_IllegalArgumentException() throws Exception {
 		
 		// Given
-		String[] args = new String[] {};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("");
-		Path dest = Paths.get("");
-//		MegaByte megaBytes = new MegaByte(Arguments.DEFAULT_SIZE);
+		String[] args = new String[] {
+				"bla",
+				"blabla"
+			};
 		
 		// Then
-		assertFalse(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-//		assertEquals(megaBytes, appProp.megaBytes);
-	}
-
-	@Disabled
-	@Test
-	final void test_twoArguments() {
-		
-		// Given
-		String[] args = new String[] {"source", "dest"};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-//		MegaByte megaBytes = new MegaByte(Arguments.DEFAULT_SIZE);
-
-		// Then
-		assertTrue(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-//		assertEquals(megaBytes, appProp.megaBytes);
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Arguments(args);
+		});
 	}
 
 	@Test
-	final void test_threeArgumentsSuccessfully() {
-		
-		// Given
-		String[] args = new String[] {"source", "dest", "2"};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("2");
-		
-		// Then
-		assertTrue(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
-	}
-
-	@Test
-	final void test_destinationFileSizeNotVaidatingToLongType() {
+	final void Arguments_test_Successfully() throws Exception {
 		
 		// Given
 		String[] args = new String[] {"source", "dest", "2.9"};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("2.9");
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte("2.9");
 		
 		// Then
-		assertTrue(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
+		assertTrue(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
 	}
 
 	// Edge case
 	@Test
-	final void test_destinationFileSizeToBig() {
+	final void test_destinationFileSizeMaxValue() throws Exception {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE.getValue().add(new BigDecimal(1)))};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("0");
+		BigDecimal maxValue = MegaByte.MAX_VALUE.getValue();
+		String[] args = new String[] {"source", "dest", String.valueOf(maxValue)};
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte(String.valueOf(MegaByte.MAX_VALUE.getValue()));
+//		System.out.println(megaBytes);
 		
 		// Then
-		assertFalse(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
-	}
-
-//	Edge case
-	@Test
-	final void test_destinationFileSizeToSmall() {
-		
-		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE.getValue().subtract(new BigDecimal(1)))};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("0");
-		
-		// Then
-		assertFalse(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
+		assertTrue(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
 	}
 
 	// Edge case
 	@Test
-	final void test_destinationFileSizeMaxValue() {
+	final void test_destinationFileSizeMoreThanMaxValue() throws Exception {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MAX_VALUE.getValue())};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte(String.valueOf(MegaByte.MAX_VALUE.getValue()));
+		BigDecimal moreThanMaxValue = MegaByte.MAX_VALUE.getValue().add(new BigDecimal(0.000_000_000_000_000_000_001));
+		String[] args = new String[] {"source", "dest", String.valueOf(moreThanMaxValue)};
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte("0");
 		
 		// Then
-		assertTrue(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
+		assertFalse(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
 	}
 
 //	Edge case
 	@Test
-	final void test_destinationFileSizeMinValue() {
+	final void test_destinationFileSizeMinValue() throws Exception {
 		
 		// Given
-		String[] args = new String[] {"source", "dest", String.valueOf(MegaByte.MIN_VALUE.getValue())};
-		Arguments appProp = new Arguments(args);
-		Path source = Paths.get("source");
-		Path dest = Paths.get("dest");
-		MegaByte megaBytes = new MegaByte("0");
+		BigDecimal minValue = MegaByte.MIN_VALUE.getValue();
+		String[] args = new String[] {"source", "dest", String.valueOf(minValue)};
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte("0");
 		
 		// Then
-		assertTrue(appProp.isSuccessfullyInitialized());
-		assertEquals(source, appProp.sourceFilePath);
-		assertEquals(dest, appProp.destinationFilePath);
-		assertEquals(megaBytes, appProp.megaBytes);
+		assertTrue(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
+	}
+
+//	Edge case
+	@Test
+	final void test_destinationFileSizeLessThanMinValue() throws Exception {
+		
+		// Given
+		BigDecimal lessThanMegaByteMinValue = MegaByte.MIN_VALUE.getValue().subtract(new BigDecimal(0.000_000_000_000_000_000_001));
+		String[] args = new String[] {"source", "dest", String.valueOf(lessThanMegaByteMinValue)};
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte("0");
+		
+		// Then
+		assertFalse(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
+	}
+	@Test
+	final void test_destinationFileSizeLess_NumberFormatException() throws Exception {
+		
+		// Given
+		String[] args = new String[] {"source", "dest", "ela"};
+		Arguments actualArguments = new Arguments(args);
+		
+		Path expectedSource = Paths.get("source");
+		Path expectedDest = Paths.get("dest");
+		MegaByte expectedMegaBytes = new MegaByte("0");
+		
+		// Then
+		assertFalse(actualArguments.isSuccessfullyInitialized());
+		assertEquals(expectedSource, actualArguments.sourceFilePath);
+		assertEquals(expectedDest, actualArguments.destinationFilePath);
+		assertEquals(expectedMegaBytes, actualArguments.megaBytes);
 	}
 }
