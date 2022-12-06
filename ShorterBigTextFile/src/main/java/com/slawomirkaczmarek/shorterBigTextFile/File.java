@@ -10,7 +10,7 @@ abstract class File {
 
 	final Path path;
 	final boolean exists;
-	Byte size;
+	protected Byte size;
 	
 	/**
 	 * 

@@ -21,6 +21,7 @@ class BigTextFileRules_Test {
 
 	@AfterAll
 	static void afterAll() throws Exception {
+		
 		Files.deleteIfExists(pathToFile3MBsize);
 		Files.deleteIfExists(pathToFile1MBsize);
 	}
