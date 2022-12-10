@@ -74,7 +74,7 @@ class SourceFile extends File {
 //			}
 			
 			byte character;
-			for(int i = sourceFileMBufLlimit - destinationFileSize; i < sourceFileMBuf.limit(); i++) {
+			for(int i = sourceFileMBufLlimit - destinationFileSize; i < sourceFileMBufLlimit; i++) {
 				character = sourceFileMBuf.get(i);
 				destinationFile.write(character);
 			}

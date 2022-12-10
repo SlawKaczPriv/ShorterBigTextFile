@@ -22,8 +22,25 @@ class SourceFile_Test {
 	}
 
 	@Test
-	void shortenTo_test() {
-		fail("Not yet implemented");
+	void shortenTo_test() throws Exception{
+		
+		// Given
+		Commons.createTextFile(pathToFile3MBsize, 3);
+		Commons.deleteIfExists(pathToFile1MBsize, "shortenTo_test()");
+		assertFalse(Files.exists(pathToFile1MBsize));
+		SourceFile sourceFile = new SourceFile(pathToFile3MBsize);
+		
+		// When
+		try {
+		sourceFile.shortenTo(pathToFile1MBsize, (int) Byte.ONE_MEGA_BYTES.longVal());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Then
+		assertTrue(Files.exists(pathToFile1MBsize));
+		assertTrue(Files.exists(pathToFile1MBsize));
+		assertEquals(Byte.ONE_MEGA_BYTES.longVal(), Files.size(pathToFile1MBsize));
 	}
 
 	@Test

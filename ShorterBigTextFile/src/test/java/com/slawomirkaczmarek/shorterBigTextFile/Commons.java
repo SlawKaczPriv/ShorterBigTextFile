@@ -62,14 +62,27 @@ public class Commons {
 
 	public static void deleteIfExists(Path shortTextFilePath, String info) {
 		
+		info = info.trim();
+		info = info.length() > 0 ? info + " " : "";
+		
 		if(Files.exists(shortTextFilePath)) {
 			try {
 				Files.delete(shortTextFilePath);
-				System.out.println(info + ". Deleted file: " + shortTextFilePath);
+				System.out.println(info + "Deleted file: " + shortTextFilePath);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	
+//	StringBuilder message(String message) {
+//		
+////		message = message.trim();
+//		return message.trim().length() == 0 ? new StringBuilder() : new StringBuilder().append(message).append(" ");
+//	}
+
+	public static void deleteIfExists(Path shortTextFilePath) {
+		deleteIfExists(shortTextFilePath, "");
 	}
 }
