@@ -57,6 +57,7 @@ public class Commons {
 			for(long i = 0; i < destinationSize; i++) {
 				bw.write("a");
 			}
+			bw.close();
 		}
 	}
 
