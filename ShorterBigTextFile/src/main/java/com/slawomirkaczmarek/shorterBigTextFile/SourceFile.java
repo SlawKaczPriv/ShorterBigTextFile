@@ -68,18 +68,11 @@ class SourceFile extends File {
 			MappedByteBuffer sourceFileMBuf = sourceFileFCh.map(FileChannel.MapMode.READ_ONLY, 0, sourceFileFCh.size());
 			int sourceFileMBufLlimit = sourceFileMBuf.limit();
 			
-//			if(destinationFileSize >= sourceFileMBufLlimit) {
-//				throw new IllegalArgumentException("destinationFileSize value: " + destinationFileSize
-//						+ ", sourceFileMappedByteBuffer.limit: " + sourceFileMBufLlimit);
-//			}
-			
 			byte character;
 			for(int i = sourceFileMBufLlimit - destinationFileSize; i < sourceFileMBufLlimit; i++) {
 				character = sourceFileMBuf.get(i);
 				destinationFile.write(character);
 			}
-		}//catch (Exception e) {
-//			System.out.println("EXCEPTION from SourceFile.shortenTo(): " + e.getMessage());
-//		}
+		}
 	}
 }
