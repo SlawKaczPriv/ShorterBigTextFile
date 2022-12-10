@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 /**
@@ -73,6 +74,29 @@ class SourceFile extends File {
 				character = sourceFileMBuf.get(i);
 				destinationFile.write(character);
 			}
+		}
+	}
+	
+	public void newShortenTo() {
+		
+		
+		try ( FileChannel fileChannel = (FileChannel) Files.newByteChannel(this.path)) {
+			
+			long fileSize = fileChannel.size();
+			MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileSize);
+			long counter = 0;
+			for(int i = 0; i < fileSize; i++) {
+//				char ch = (char)mappedByteBuffer.get(i);
+				char ch = (char)mappedByteBuffer.get();
+				System.out.println(ch);
+				counter++;
+			}
+			System.out.println("counter=" + counter);
+		} catch (InvalidPathException e) {
+			System.out.println("Błąd ścieżki: " + e);
+		} catch (IOException e) {
+			System.out.println("Błąd wejścia-wyjścia: " + e);
+			e.printStackTrace();
 		}
 	}
 }

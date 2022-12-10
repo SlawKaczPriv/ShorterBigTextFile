@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class SourceFile_Test {
@@ -20,7 +21,7 @@ class SourceFile_Test {
 		Files.deleteIfExists(pathToFile3MBsize);
 		Files.deleteIfExists(pathToFile1MBsize);
 	}
-
+	
 	@Test
 	void shortenTo_test() throws Exception{
 		
@@ -41,6 +42,22 @@ class SourceFile_Test {
 		assertTrue(Files.exists(pathToFile1MBsize));
 		assertTrue(Files.exists(pathToFile1MBsize));
 		assertEquals(Byte.ONE_MEGA_BYTES.longVal(), Files.size(pathToFile1MBsize));
+	}
+
+	@Test
+	void newShortenTo_test() throws Exception{
+		
+		// Given
+		Path path = Paths.get("C:\\Users\\20624\\Desktop\\textFile1MBsize.txt");
+		assertTrue(Files.exists(path));
+		SourceFile sourceFile = new SourceFile(path);
+		System.out.println("path=" + sourceFile.path);
+		System.out.println("size=" + Files.size(path));
+		
+		// When
+		sourceFile.newShortenTo();
+		
+		// Then
 	}
 
 	@Test
