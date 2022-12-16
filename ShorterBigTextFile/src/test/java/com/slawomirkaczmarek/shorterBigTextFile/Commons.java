@@ -5,31 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Commons {
-
-	/** BigTextFile size = 1 188 888 897 bytes (1.10 GB) */
-	static final Path BIG_TEXT_FILE_PATH = Paths.get("src/test/resources/bigTextFile.txt");
-
-	/**
-	 * BigTextFile size = 1 188 888 897 bytes (1.10 GB)
-	 * 
-	 * @param bigTextFilePath
-	 * @throws Exception
-	 */
-	static void createBigTextFile(Path bigTextFilePath) throws Exception {
-		
-		if(! Files.exists(bigTextFilePath)) {
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(bigTextFilePath.toString()))){
-				System.out.println("JUnit Tests - BeforeAll - Creating BigTextFile");
-				for(long i = 1; i < 80_000_001; i++) {
-					bw.write("Line " + i);
-					bw.newLine();
-				}
-			}
-		}
-	}
 	
 	/**
 	 * 
@@ -53,14 +30,21 @@ public class Commons {
 				Files.delete(textFilePath);}
 		}
 		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(textFilePath.toString()))){
+		try(FileWriter fW = new FileWriter(textFilePath.toString());
+				BufferedWriter bw = new BufferedWriter(fW)){
 			for(long i = 0; i < destinationSize; i++) {
 				bw.write("a");
 			}
+			fW.close();
 			bw.close();
 		}
 	}
 
+	/**
+	 * 
+	 * @param shortTextFilePath
+	 * @param info
+	 */
 	public static void deleteIfExists(Path shortTextFilePath, String info) {
 		
 		info = info.trim();
@@ -74,15 +58,15 @@ public class Commons {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else {
+//			System.out.println(info + "deleteIfExists(): file not exists: " + shortTextFilePath);
 		}
 	}
-	
-//	StringBuilder message(String message) {
-//		
-////		message = message.trim();
-//		return message.trim().length() == 0 ? new StringBuilder() : new StringBuilder().append(message).append(" ");
-//	}
 
+	/**
+	 * 
+	 * @param shortTextFilePath
+	 */
 	public static void deleteIfExists(Path shortTextFilePath) {
 		deleteIfExists(shortTextFilePath, "");
 	}

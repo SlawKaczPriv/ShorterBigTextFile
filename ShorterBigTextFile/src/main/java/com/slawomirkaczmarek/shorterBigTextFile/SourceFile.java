@@ -74,11 +74,13 @@ class SourceFile extends File {
 				character = sourceFileMBuf.get(i);
 				destinationFile.write(character);
 			}
+			
+			destinationFile.close();
+			sourceFileFCh.close();
 		}
 	}
 	
 	public void newShortenTo() {
-		
 		
 		try ( FileChannel fileChannel = (FileChannel) Files.newByteChannel(this.path)) {
 			

@@ -23,6 +23,7 @@ class BigTextFileRules_Test {
 	static void afterAll() throws Exception {
 		
 		Files.deleteIfExists(pathToFile3MBsize);
+//		Commons.deleteIfExists(pathToFile3MBsize, "BigTextFileRules_Test: afterAll()");
 		Files.deleteIfExists(pathToFile1MBsize);
 	}
 

@@ -11,29 +11,23 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class Application_Test {
+	
+	private static final Path pathToFile3MBsize = Paths.get("src/test/resources/textFile3MBsize.txt");
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		Commons.createBigTextFile(Commons.BIG_TEXT_FILE_PATH);
+		Commons.createTextFile(pathToFile3MBsize, 3);
 	}
 
 	@Disabled
 	@Test
 	public void testPrintProps() throws Exception {
 		
-//		Properties props = new Properties();
-//		props.put("key1", "value1");
-//		props.put("key2", "value2");
-//		Application application = new Application(props);
-//		application.printProps();
-//		fail("Not yet implemented");
-		
-		
-		Path shortTextFilePath = Paths.get("src/test/resources/shortTextFile.txt");
+		Path shortTextFilePath = Paths.get("src/test/resources/textFile1MBsize.txt");
 //		Files.deleteIfExists(shortTextFilePath);
 		Commons.deleteIfExists(shortTextFilePath, "Application_Test");
 		
-		String[] args = new String[] {Commons.BIG_TEXT_FILE_PATH.toString(), shortTextFilePath.toString(), "2"};
+		String[] args = new String[] {pathToFile3MBsize.toString(), shortTextFilePath.toString(), "2"};
 		
 		Application.main(args);
 		
@@ -64,7 +58,7 @@ class Application_Test {
 		Path shortTextFilePath = Paths.get("src/test/resources/shortTextFile.txt");
 		Commons.deleteIfExists(shortTextFilePath, "Application_Test");
 		
-		String[] args = new String[] {Commons.BIG_TEXT_FILE_PATH.toString(),
+		String[] args = new String[] {pathToFile3MBsize.toString(),
 				"src/test/resources/shortTextFile.txt"};
 		
 		Application.main(args);

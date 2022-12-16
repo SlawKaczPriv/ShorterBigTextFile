@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +15,18 @@ class SourceFile_Test {
 	
 	private static final Path pathToFile3MBsize = Paths.get("src/test/resources/textFile3MBsize.txt");
 	private static final Path pathToFile1MBsize = Paths.get("src/test/resources/textFile1MBsize.txt");
+
+	@BeforeAll
+	static void beforeAll() throws Exception {
+		
+		Files.deleteIfExists(pathToFile3MBsize);
+		Files.deleteIfExists(pathToFile1MBsize);
+	}
 	
 	@AfterAll
 	static void afterAll() throws Exception {
 		
-		Files.deleteIfExists(pathToFile3MBsize);
+//		Files.deleteIfExists(pathToFile3MBsize);
 		Files.deleteIfExists(pathToFile1MBsize);
 	}
 	
@@ -44,11 +52,17 @@ class SourceFile_Test {
 		assertEquals(Byte.ONE_MEGA_BYTES.longVal(), Files.size(pathToFile1MBsize));
 	}
 
+//	@Disabled
 	@Test
 	void newShortenTo_test() throws Exception{
 		
 		// Given
-		Path path = Paths.get("C:\\Users\\20624\\Desktop\\textFile1MBsize.txt");
+		Path path = Paths.get("C:\\Users\\20624\\Desktop\\textFile.txt");
+		Path pathCopy = Paths.get("C:\\Users\\20624\\Desktop\\textFile_copy.txt");
+//		Files.deleteIfExists(path);
+		Commons.deleteIfExists(path, "newShortenTo_test()");
+		assertFalse(Files.exists(path));
+		Files.copy(pathCopy, path);
 		assertTrue(Files.exists(path));
 		SourceFile sourceFile = new SourceFile(path);
 		System.out.println("path=" + sourceFile.path);
@@ -58,6 +72,8 @@ class SourceFile_Test {
 		sourceFile.newShortenTo();
 		
 		// Then
+		
+//		Files.deleteIfExists(path);
 	}
 
 	@Test
